@@ -383,7 +383,7 @@ function App() {
                       onClick={() => toggleSftp(activeTabId)}
                       className={`px-2 py-1 rounded text-[10px] font-medium flex items-center gap-1 transition-colors ${
                         sftpOpenTabs.has(activeTabId)
-                          ? 'bg-[#89b4fa] text-[#1e1e2e]'
+                          ? 'bg-[#3ddc97] text-[#1e1e2e]'
                           : 'bg-[#313244] text-[#bac2de] hover:bg-[#45475a]'
                       }`}
                       title="SFTP 파일 매니저 토글"
@@ -415,7 +415,7 @@ function App() {
                   onClick={() => toggleTmux(activeTabId)}
                   className={`px-2 py-1 rounded text-[10px] font-medium flex items-center gap-1 transition-colors ${
                     tmuxOpenTabs.has(activeTabId)
-                      ? 'bg-[#a6e3a1] text-[#1e1e2e]'
+                      ? 'bg-[#3ddc97] text-[#1e1e2e]'
                       : 'bg-[#313244] text-[#bac2de] hover:bg-[#45475a]'
                   }`}
                   title="tmux 세션 관리"
@@ -467,7 +467,7 @@ function App() {
               >
                 {/* 드래그 핸들 */}
                 <div
-                  className="h-1 bg-white/5 hover:bg-[#89b4fa]/50 cursor-row-resize shrink-0 transition-colors"
+                  className="h-1 bg-white/5 hover:bg-[#3ddc97]/50 cursor-row-resize shrink-0 transition-colors"
                   onMouseDown={handleResizeStart}
                 />
                 <div className="flex-1 min-h-0">

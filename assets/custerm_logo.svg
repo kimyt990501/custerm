@@ -1,0 +1,18 @@
+<svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font-family: 'SF Pro Display', 'Helvetica Neue', -apple-system, sans-serif; font-weight: 700; font-size: 88px; fill: #18181b; letter-spacing: -3px; }
+    .accent { fill: #34d399; }
+  </style>
+
+  <!-- Icon -->
+  <g transform="translate(30, 30)">
+    <rect width="140" height="140" rx="30" ry="30" fill="#18181b"/>
+    <path d="M 46 52 L 71 70 L 46 88"
+          stroke="#34d399" stroke-width="8"
+          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <rect x="77" y="84" width="25" height="8" rx="4" ry="4" fill="#34d399"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="200" y="128" class="title">Cus<tspan class="accent">Term</tspan></text>
+</svg>

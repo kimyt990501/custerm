@@ -189,7 +189,7 @@ function DbProfileDialog({ editProfile, sshProfiles, onSave, onCancel }: DbProfi
                 <div className="text-[10px] text-[#9399b2]">외부에 열려 있지 않은 원격 MySQL에 접속</div>
               </div>
               {useSshTunnel && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#a6e3a1] shadow-[0_0_4px_rgba(166,227,161,0.6)]" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#3ddc97] shadow-[0_0_4px_rgba(61,220,151,0.6)]" />
               )}
             </label>
             {useSshTunnel && (

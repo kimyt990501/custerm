@@ -126,7 +126,7 @@ function Sidebar({
           className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[12px] text-[#bac2de] hover:text-[#cdd6f4] hover:bg-white/5 transition-colors group"
           title="설정 (Ctrl+,)"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0 text-[#9399b2] group-hover:text-[#89b4fa] transition-colors">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0 text-[#9399b2] group-hover:text-[#3ddc97] transition-colors">
             <circle cx="7" cy="7" r="2" stroke="currentColor" strokeWidth="1.2" />
             <path
               d="M7 1v1.5M7 11.5V13M13 7h-1.5M2.5 7H1M11.24 2.76l-1.06 1.06M3.82 10.18l-1.06 1.06M11.24 11.24l-1.06-1.06M3.82 3.82L2.76 2.76"
@@ -209,7 +209,7 @@ function ProfileRow({
       </div>
       <button
         onClick={e => { e.stopPropagation(); onOpen(); }}
-        className="opacity-0 group-hover:opacity-100 w-6 h-6 flex items-center justify-center rounded-md text-[#9399b2] hover:text-[#a6e3a1] hover:bg-white/5 transition-all"
+        className="opacity-0 group-hover:opacity-100 w-6 h-6 flex items-center justify-center rounded-md text-[#9399b2] hover:text-[#3ddc97] hover:bg-white/5 transition-all"
         title="연결"
       >
         <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor">
@@ -242,7 +242,7 @@ function DbProfileRow({
         <div className="text-[12px] text-[#cdd6f4] truncate font-medium flex items-center gap-1.5">
           {profile.name}
           {profile.useSshTunnel && (
-            <span className="px-1 py-0 text-[8px] rounded bg-[#89b4fa]/15 text-[#89b4fa] font-mono">SSH</span>
+            <span className="px-1 py-0 text-[8px] rounded bg-[#3ddc97]/15 text-[#3ddc97] font-mono">SSH</span>
           )}
         </div>
         <div className="text-[10px] text-[#9399b2] truncate font-mono">
@@ -268,8 +268,8 @@ function ProfileIcon({ type }: { type: SshProfile['type'] }) {
     );
   }
   return (
-    <div className="w-7 h-7 rounded-md flex items-center justify-center bg-gradient-to-br from-[#89b4fa]/15 to-[#74c7ec]/10 border border-[#89b4fa]/15 shrink-0">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[#89b4fa]">
+    <div className="w-7 h-7 rounded-md flex items-center justify-center bg-gradient-to-br from-[#3ddc97]/15 to-[#74c7ec]/10 border border-[#3ddc97]/15 shrink-0">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[#3ddc97]">
         <rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
         <path d="M4 6.5l1.5 1.5L4 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M7 9.5h3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />

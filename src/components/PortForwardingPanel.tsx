@@ -53,9 +53,9 @@ function PortForwardingPanel({ sshSessionId }: PortForwardingPanelProps) {
 
   const typeColor = (type: ForwardingType): string => {
     switch (type) {
-      case 'local': return '#a6e3a1';
+      case 'local': return '#3ddc97';
       case 'remote': return '#f9e2af';
-      case 'dynamic': return '#89b4fa';
+      case 'dynamic': return '#3ddc97';
     }
   };
 
@@ -75,7 +75,7 @@ function PortForwardingPanel({ sshSessionId }: PortForwardingPanelProps) {
     <div className="flex flex-col h-full bg-gradient-to-b from-[#181825]/80 to-[#11111b]/70 backdrop-blur-xl border-l border-white/5 w-[300px] shrink-0 select-none">
       {/* 헤더 */}
       <div className="h-11 flex items-center gap-2.5 px-4 border-b border-white/5 bg-black/10">
-        <div className="w-6 h-6 rounded-md flex items-center justify-center bg-[#89b4fa]/15 text-[#89b4fa]">
+        <div className="w-6 h-6 rounded-md flex items-center justify-center bg-[#3ddc97]/15 text-[#3ddc97]">
           <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
             <path d="M3 2v10M11 2v10M3 4h8M3 10h8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
           </svg>
@@ -127,7 +127,7 @@ function PortForwardingPanel({ sshSessionId }: PortForwardingPanelProps) {
                   <span className="flex items-center gap-1">
                     <span
                       className="w-1.5 h-1.5 rounded-full"
-                      style={{ backgroundColor: tunnel.status === 'active' ? '#a6e3a1' : '#f38ba8' }}
+                      style={{ backgroundColor: tunnel.status === 'active' ? '#3ddc97' : '#f38ba8' }}
                     />
                     {tunnel.status === 'active' ? '활성' : tunnel.status === 'error' ? '오류' : '닫힘'}
                   </span>
@@ -180,14 +180,14 @@ function PortForwardingPanel({ sshSessionId }: PortForwardingPanelProps) {
             placeholder="주소"
             value={localAddr}
             onChange={e => setLocalAddr(e.target.value)}
-            className="w-[85px] bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#89b4fa]/50 transition-colors font-mono"
+            className="w-[85px] bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#3ddc97]/50 transition-colors font-mono"
           />
           <input
             type="number"
             placeholder="로컬 포트"
             value={localPort}
             onChange={e => setLocalPort(e.target.value)}
-            className="flex-1 bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#89b4fa]/50 transition-colors font-mono"
+            className="flex-1 bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#3ddc97]/50 transition-colors font-mono"
           />
         </div>
 
@@ -199,14 +199,14 @@ function PortForwardingPanel({ sshSessionId }: PortForwardingPanelProps) {
               placeholder="주소"
               value={remoteAddr}
               onChange={e => setRemoteAddr(e.target.value)}
-              className="w-[85px] bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#89b4fa]/50 transition-colors font-mono"
+              className="w-[85px] bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#3ddc97]/50 transition-colors font-mono"
             />
             <input
               type="number"
               placeholder="원격 포트"
               value={remotePort}
               onChange={e => setRemotePort(e.target.value)}
-              className="flex-1 bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#89b4fa]/50 transition-colors font-mono"
+              className="flex-1 bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#3ddc97]/50 transition-colors font-mono"
             />
           </div>
         )}
@@ -222,7 +222,7 @@ function PortForwardingPanel({ sshSessionId }: PortForwardingPanelProps) {
         <button
           onClick={handleCreate}
           disabled={creating}
-          className="w-full py-1.5 text-[11px] font-medium rounded-lg bg-[#89b4fa] text-[#1e1e2e] hover:bg-[#74c7ec] disabled:opacity-50 transition-colors shadow-sm shadow-[#89b4fa]/20"
+          className="w-full py-1.5 text-[11px] font-medium rounded-lg bg-[#3ddc97] text-[#1e1e2e] hover:bg-[#74c7ec] disabled:opacity-50 transition-colors shadow-sm shadow-[#3ddc97]/20"
         >
           {creating ? '생성 중...' : '터널 생성'}
         </button>

@@ -59,11 +59,11 @@ function TransferRow({
       <span className="text-[10px] shrink-0">
         {transfer.direction === 'upload' ? (
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M6 10V2M3 5l3-3 3 3" stroke="#a6e3a1" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M6 10V2M3 5l3-3 3 3" stroke="#3ddc97" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         ) : (
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M6 2v8M3 7l3 3 3-3" stroke="#89b4fa" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M6 2v8M3 7l3 3 3-3" stroke="#3ddc97" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         )}
       </span>
@@ -79,8 +79,8 @@ function TransferRow({
           <div
             className={`h-full rounded-full transition-all duration-150 ${
               transfer.status === 'failed' ? 'bg-[#f38ba8]'
-                : transfer.status === 'completed' ? 'bg-[#a6e3a1]'
-                : 'bg-[#89b4fa]'
+                : transfer.status === 'completed' ? 'bg-[#3ddc97]'
+                : 'bg-[#3ddc97]'
             }`}
             style={{ width: `${percentage}%` }}
           />

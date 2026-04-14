@@ -46,7 +46,7 @@ function WslTmuxPanel({ distro, ptyId }: WslTmuxPanelProps) {
     <div className="flex flex-col h-full bg-gradient-to-b from-[#181825]/80 to-[#11111b]/70 backdrop-blur-xl border-l border-white/5 w-[300px] shrink-0 select-none">
       {/* 헤더 */}
       <div className="h-11 flex items-center gap-2.5 px-4 border-b border-white/5 bg-black/10">
-        <div className="w-6 h-6 rounded-md flex items-center justify-center bg-[#a6e3a1]/15 text-[#a6e3a1]">
+        <div className="w-6 h-6 rounded-md flex items-center justify-center bg-[#3ddc97]/15 text-[#3ddc97]">
           <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
             <rect x="1.5" y="2" width="11" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.2" />
             <path d="M1.5 5h11M5 5v7" stroke="currentColor" strokeWidth="1.2" />
@@ -108,8 +108,8 @@ function WslTmuxPanel({ distro, ptyId }: WslTmuxPanelProps) {
               <span
                 className="w-2 h-2 rounded-full shrink-0 shadow-sm"
                 style={{
-                  backgroundColor: session.attached ? '#a6e3a1' : '#6c7086',
-                  boxShadow: session.attached ? '0 0 6px rgba(166,227,161,0.4)' : 'none',
+                  backgroundColor: session.attached ? '#3ddc97' : '#6c7086',
+                  boxShadow: session.attached ? '0 0 6px rgba(61,220,151,0.4)' : 'none',
                 }}
                 title={session.attached ? '연결됨' : '분리됨'}
               />
@@ -124,7 +124,7 @@ function WslTmuxPanel({ distro, ptyId }: WslTmuxPanelProps) {
               </div>
               <button
                 onClick={() => handleAttach(session.name)}
-                className="px-2 py-0.5 text-[9px] font-medium rounded-md bg-[#89b4fa]/10 text-[#89b4fa] hover:bg-[#89b4fa]/25 opacity-0 group-hover:opacity-100 shrink-0 transition-all"
+                className="px-2 py-0.5 text-[9px] font-medium rounded-md bg-[#3ddc97]/10 text-[#3ddc97] hover:bg-[#3ddc97]/25 opacity-0 group-hover:opacity-100 shrink-0 transition-all"
                 title="세션 연결"
               >
                 연결
@@ -154,12 +154,12 @@ function WslTmuxPanel({ distro, ptyId }: WslTmuxPanelProps) {
               value={newSessionName}
               onChange={e => setNewSessionName(e.target.value)}
               onKeyDown={e => { if (e.key === 'Enter') handleCreate(); }}
-              className="flex-1 bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#89b4fa]/50 transition-colors"
+              className="flex-1 bg-[#0b0b14]/50 text-[#cdd6f4] text-[11px] px-2 py-1.5 rounded-lg border border-white/5 outline-none focus:border-[#3ddc97]/50 transition-colors"
             />
             <button
               onClick={handleCreate}
               disabled={creating}
-              className="px-3 py-1.5 text-[11px] font-medium rounded-lg bg-[#89b4fa] text-[#1e1e2e] hover:bg-[#74c7ec] disabled:opacity-50 transition-colors shadow-sm shadow-[#89b4fa]/20"
+              className="px-3 py-1.5 text-[11px] font-medium rounded-lg bg-[#3ddc97] text-[#1e1e2e] hover:bg-[#74c7ec] disabled:opacity-50 transition-colors shadow-sm shadow-[#3ddc97]/20"
             >
               {creating ? '...' : '생성'}
             </button>

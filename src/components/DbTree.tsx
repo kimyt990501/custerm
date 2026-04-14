@@ -142,7 +142,7 @@ function DbTree({ databases, listTables, describeTable, onSelectTable, onRefresh
                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none" className={`text-[#9399b2] transition-transform ${isOpen ? 'rotate-90' : ''}`}>
                   <path d="M2 1l4 3-4 3z" fill="currentColor" />
                 </svg>
-                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="text-[#89b4fa] shrink-0">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="text-[#3ddc97] shrink-0">
                   <ellipse cx="7" cy="3" rx="5" ry="1.5" stroke="currentColor" strokeWidth="1.1" />
                   <path d="M2 3v8c0 .83 2.24 1.5 5 1.5s5-.67 5-1.5V3" stroke="currentColor" strokeWidth="1.1" />
                 </svg>
@@ -207,7 +207,7 @@ function DbTree({ databases, listTables, describeTable, onSelectTable, onRefresh
                                     <path d="M5 5h4M7 5v2M8.5 5v1.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
                                   </svg>
                                 ) : col.key === 'MUL' || col.key === 'UNI' ? (
-                                  <svg width="9" height="9" viewBox="0 0 10 10" fill="none" className="text-[#89b4fa] shrink-0 opacity-70">
+                                  <svg width="9" height="9" viewBox="0 0 10 10" fill="none" className="text-[#3ddc97] shrink-0 opacity-70">
                                     <path d="M3 2v6M3 8l-1.5-1.5M3 8l1.5-1.5M7 8V2M7 2l-1.5 1.5M7 2l1.5 1.5" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
                                   </svg>
                                 ) : (

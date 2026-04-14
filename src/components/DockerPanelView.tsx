@@ -24,9 +24,9 @@ interface DockerPanelViewProps {
 }
 
 const STATE_COLOR: Record<string, string> = {
-  running: '#a6e3a1',
+  running: '#3ddc97',
   paused: '#f9e2af',
-  restarting: '#89b4fa',
+  restarting: '#3ddc97',
   created: '#cba6f7',
   exited: '#6c7086',
   dead: '#f38ba8',
@@ -164,7 +164,7 @@ function DockerPanelView({ controller }: DockerPanelViewProps) {
                     className="w-2 h-2 rounded-full shrink-0 shadow-sm mt-1"
                     style={{
                       backgroundColor: STATE_COLOR[c.state] || '#6c7086',
-                      boxShadow: c.state === 'running' ? '0 0 6px rgba(166,227,161,0.4)' : 'none',
+                      boxShadow: c.state === 'running' ? '0 0 6px rgba(61,220,151,0.4)' : 'none',
                     }}
                     title={c.state}
                   />
@@ -172,7 +172,7 @@ function DockerPanelView({ controller }: DockerPanelViewProps) {
                     <div className="text-[11px] text-[#cdd6f4] truncate font-medium">{c.name}</div>
                     <div className="text-[10px] text-[#9399b2] truncate" title={c.image}>{c.image}</div>
                     <div className="text-[9px] text-[#9399b2] truncate" title={c.status}>{c.status}</div>
-                    {c.ports && <div className="text-[9px] text-[#89b4fa]/70 truncate font-mono" title={c.ports}>{c.ports}</div>}
+                    {c.ports && <div className="text-[9px] text-[#3ddc97]/70 truncate font-mono" title={c.ports}>{c.ports}</div>}
                     <div className="flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       {c.state === 'running' ? (
                         <button
@@ -183,13 +183,13 @@ function DockerPanelView({ controller }: DockerPanelViewProps) {
                       ) : (
                         <button
                           onClick={() => start(c.id)}
-                          className="px-1.5 py-0.5 text-[9px] rounded bg-[#a6e3a1]/10 text-[#a6e3a1] hover:bg-[#a6e3a1]/25"
+                          className="px-1.5 py-0.5 text-[9px] rounded bg-[#3ddc97]/10 text-[#3ddc97] hover:bg-[#3ddc97]/25"
                           title="시작"
                         >▶</button>
                       )}
                       <button
                         onClick={() => restart(c.id)}
-                        className="px-1.5 py-0.5 text-[9px] rounded bg-[#89b4fa]/10 text-[#89b4fa] hover:bg-[#89b4fa]/25"
+                        className="px-1.5 py-0.5 text-[9px] rounded bg-[#3ddc97]/10 text-[#3ddc97] hover:bg-[#3ddc97]/25"
                         title="재시작"
                       >↻</button>
                       <button

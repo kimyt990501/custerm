@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import custermIcon from '../assets/custerm.png';
 
 interface SettingsPanelProps {
   settings: AppSettings;
@@ -36,9 +37,12 @@ function SettingsPanel({ settings, themeNames, onUpdate, onClose }: SettingsPane
         {/* 좌측 내비 */}
         <div className="w-52 shrink-0 bg-gradient-to-b from-[#181825] to-[#11111b] border-r border-white/5 flex flex-col">
           <div className="h-14 flex items-center gap-2.5 px-5 border-b border-white/5">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#f38ba8] to-[#89b4fa] flex items-center justify-center text-sm font-bold text-[#11111b] shadow-md shadow-[#f38ba8]/20">
-              C
-            </div>
+            <img
+              src={custermIcon}
+              alt="Custerm"
+              className="w-7 h-7 rounded-lg shadow-md shadow-[#3ddc97]/20"
+              draggable={false}
+            />
             <span className="text-sm font-semibold text-[#cdd6f4] tracking-wide">설정</span>
           </div>
           <nav className="flex-1 py-3 px-2 space-y-1">
@@ -103,11 +107,11 @@ function TabItem({
       onClick={onClick}
       className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all ${
         active
-          ? 'bg-gradient-to-r from-[#f38ba8]/15 to-transparent text-[#cdd6f4] shadow-inner ring-1 ring-[#f38ba8]/20'
+          ? 'bg-gradient-to-r from-[#3ddc97]/15 to-transparent text-[#cdd6f4] shadow-inner ring-1 ring-[#3ddc97]/25'
           : 'text-[#bac2de] hover:text-[#cdd6f4] hover:bg-white/[0.03]'
       }`}
     >
-      <span className={active ? 'text-[#f38ba8]' : 'text-[#9399b2]'}>{icon}</span>
+      <span className={active ? 'text-[#3ddc97]' : 'text-[#9399b2]'}>{icon}</span>
       <span className="font-medium">{label}</span>
     </button>
   );
@@ -134,14 +138,14 @@ function AppearanceTab({
                 onClick={() => onUpdate({ themeName: name })}
                 className={`group relative px-3 py-2.5 rounded-lg border text-left transition-all ${
                   selected
-                    ? 'border-[#89b4fa] bg-[#89b4fa]/10 shadow-[0_0_0_3px_rgba(137,180,250,0.08)]'
+                    ? 'border-[#3ddc97] bg-[#3ddc97]/10 shadow-[0_0_0_3px_rgba(61,220,151,0.08)]'
                     : 'border-white/5 bg-[#11111b] hover:border-white/15'
                 }`}
               >
                 <div className="text-[12px] font-medium text-[#cdd6f4] truncate">{name}</div>
                 <ThemeSwatch name={name} />
                 {selected && (
-                  <div className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[#89b4fa] flex items-center justify-center">
+                  <div className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-[#3ddc97] flex items-center justify-center">
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
                       <path d="M1.5 4L3.5 6L7 2" stroke="#11111b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -220,7 +224,7 @@ function AppearanceTab({
 function ThemeSwatch({ name }: { name: string }) {
   // 테마별 대표 5색 미리보기. 내장 테마 이름에 맞춰 하드코딩.
   const palettes: Record<string, string[]> = {
-    'Catppuccin Mocha': ['#1e1e2e', '#f38ba8', '#a6e3a1', '#89b4fa', '#f5c2e7'],
+    'Catppuccin Mocha': ['#1e1e2e', '#f38ba8', '#3ddc97', '#3ddc97', '#f5c2e7'],
     'One Dark':         ['#282c34', '#e06c75', '#98c379', '#61afef', '#c678dd'],
     'Dracula':          ['#282a36', '#ff5555', '#50fa7b', '#8be9fd', '#ff79c6'],
     'Solarized Dark':   ['#002b36', '#dc322f', '#859900', '#268bd2', '#d33682'],
@@ -228,7 +232,7 @@ function ThemeSwatch({ name }: { name: string }) {
     'Nord':             ['#2e3440', '#bf616a', '#a3be8c', '#81a1c1', '#b48ead'],
     'Gruvbox Dark':     ['#282828', '#cc241d', '#98971a', '#458588', '#b16286'],
   };
-  const palette = palettes[name] || ['#1e1e2e', '#f38ba8', '#a6e3a1', '#89b4fa', '#f5c2e7'];
+  const palette = palettes[name] || ['#1e1e2e', '#f38ba8', '#3ddc97', '#3ddc97', '#f5c2e7'];
   return (
     <div className="flex gap-1 mt-2">
       {palette.map((c, i) => (
@@ -253,7 +257,7 @@ function TerminalTab({
         <select
           value={settings.fontFamily}
           onChange={e => onUpdate({ fontFamily: e.target.value })}
-          className="w-full bg-[#11111b] text-[#cdd6f4] text-[13px] px-3 py-2.5 rounded-lg border border-white/5 outline-none focus:border-[#89b4fa]/60 transition-colors"
+          className="w-full bg-[#11111b] text-[#cdd6f4] text-[13px] px-3 py-2.5 rounded-lg border border-white/5 outline-none focus:border-[#3ddc97]/60 transition-colors"
           style={{ fontFamily: settings.fontFamily }}
         >
           <option value="'CaskaydiaCove Nerd Font', 'Cascadia Code', monospace">CaskaydiaCove Nerd Font</option>
@@ -271,9 +275,9 @@ function TerminalTab({
           className="mt-3 px-3 py-3 rounded-lg bg-[#11111b] border border-white/5 text-[#cdd6f4]"
           style={{ fontFamily: settings.fontFamily, fontSize: settings.fontSize, lineHeight: settings.lineHeight }}
         >
-          <div className="text-[#a6e3a1]">$ echo "hello, world!"</div>
+          <div className="text-[#3ddc97]">$ echo "hello, world!"</div>
           <div className="text-[#cdd6f4]">hello, world!</div>
-          <div className="text-[#89b4fa]">→ abc 123 ABC — 가나다 あいう</div>
+          <div className="text-[#3ddc97]">→ abc 123 ABC — 가나다 あいう</div>
         </div>
       </Card>
 
@@ -305,7 +309,7 @@ function TerminalTab({
                 onClick={() => onUpdate({ cursorStyle: style })}
                 className={`px-3 py-3 rounded-lg border transition-all flex flex-col items-center gap-1.5 ${
                   selected
-                    ? 'border-[#89b4fa] bg-[#89b4fa]/10'
+                    ? 'border-[#3ddc97] bg-[#3ddc97]/10'
                     : 'border-white/5 bg-[#11111b] hover:border-white/15'
                 }`}
               >
@@ -408,9 +412,12 @@ function AboutTab() {
     <>
       <Card>
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#f38ba8] via-[#cba6f7] to-[#89b4fa] flex items-center justify-center text-2xl font-bold text-[#11111b] shadow-lg shadow-[#cba6f7]/20">
-            C
-          </div>
+          <img
+            src={custermIcon}
+            alt="Custerm"
+            className="w-16 h-16 rounded-2xl shadow-lg shadow-[#3ddc97]/25"
+            draggable={false}
+          />
           <div>
             <div className="text-lg font-semibold text-[#cdd6f4]">Custerm</div>
             <div className="text-[13px] text-[#bac2de]">Multi-tab SSH · WSL · MySQL 클라이언트</div>
@@ -499,7 +506,7 @@ function Slider({
         min={min} max={max} step={step}
         value={value}
         onChange={e => onChange(step < 1 ? parseFloat(e.target.value) : parseInt(e.target.value, 10))}
-        className="w-full accent-[#89b4fa] cursor-pointer"
+        className="w-full accent-[#3ddc97] cursor-pointer"
       />
       {(leftLabel || rightLabel) && (
         <div className="flex justify-between text-[10px] text-[#9399b2] mt-1.5">
@@ -519,7 +526,7 @@ function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: (v: b
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${
-        checked ? 'bg-[#89b4fa]' : 'bg-[#313244]'
+        checked ? 'bg-[#3ddc97]' : 'bg-[#313244]'
       }`}
     >
       <span

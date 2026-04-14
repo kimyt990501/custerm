@@ -126,6 +126,7 @@ function createWindow(): void {
     minWidth: 800,
     minHeight: 600,
     title: 'Custerm',
+    icon: path.join(ELECTRON_DIST, '..', 'icon', 'custerm.ico'),
     frame: false,
     opacity: settings.opacity,
     backgroundColor: useAcrylic ? '#00000000' : undefined,

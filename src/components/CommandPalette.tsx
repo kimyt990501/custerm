@@ -81,7 +81,7 @@ export default function CommandPalette({ isOpen, onClose, profiles, onConnect }:
               onClick={e => e.stopPropagation()}
             >
               <div className="flex items-center px-4 py-3 border-b border-[#313244]/50">
-                <Search className="w-5 h-5 text-[#89b4fa] mr-3 shrink-0" />
+                <Search className="w-5 h-5 text-[#3ddc97] mr-3 shrink-0" />
                 <input
                   ref={inputRef}
                   type="text"
@@ -102,7 +102,7 @@ export default function CommandPalette({ isOpen, onClose, profiles, onConnect }:
                     <div
                       key={profile.id}
                       className={`px-4 py-3 flex items-center gap-3 cursor-pointer transition-colors ${
-                        i === selectedIndex ? 'bg-[#89b4fa]/10' : 'hover:bg-[#313244]/30'
+                        i === selectedIndex ? 'bg-[#3ddc97]/10' : 'hover:bg-[#313244]/30'
                       }`}
                       onClick={() => {
                         onConnect(profile);
@@ -112,7 +112,7 @@ export default function CommandPalette({ isOpen, onClose, profiles, onConnect }:
                     >
                       <div className={`p-2 rounded-lg ${
                         i === selectedIndex
-                          ? profile.type === 'wsl' ? 'bg-[#fab387]/20 text-[#fab387]' : 'bg-[#89b4fa]/20 text-[#89b4fa]'
+                          ? profile.type === 'wsl' ? 'bg-[#fab387]/20 text-[#fab387]' : 'bg-[#3ddc97]/20 text-[#3ddc97]'
                           : 'bg-[#313244]/50 text-[#bac2de]'
                       }`}>
                         <Terminal className="w-4 h-4" />
@@ -120,7 +120,7 @@ export default function CommandPalette({ isOpen, onClose, profiles, onConnect }:
                       <div className="flex-1 min-w-0">
                         <div className={`font-medium truncate ${
                           i === selectedIndex
-                            ? profile.type === 'wsl' ? 'text-[#fab387]' : 'text-[#89b4fa]'
+                            ? profile.type === 'wsl' ? 'text-[#fab387]' : 'text-[#3ddc97]'
                             : 'text-[#cdd6f4]'
                         }`}>
                           {profile.name}
@@ -134,7 +134,7 @@ export default function CommandPalette({ isOpen, onClose, profiles, onConnect }:
                         </div>
                       </div>
                       {i === selectedIndex && (
-                         <span className="text-xs font-semibold text-[#89b4fa]">Enter</span>
+                         <span className="text-xs font-semibold text-[#3ddc97]">Enter</span>
                       )}
                     </div>
                   ))

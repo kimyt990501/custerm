@@ -97,14 +97,14 @@ function ResultGrid({ result, error }: ResultGridProps) {
   if (result.kind === 'ok') {
     return (
       <div className="h-full flex items-center justify-center bg-[#0b0b14] p-4">
-        <div className="max-w-md w-full bg-[#11111b]/60 border border-[#a6e3a1]/20 rounded-xl p-5 shadow-lg">
+        <div className="max-w-md w-full bg-[#11111b]/60 border border-[#3ddc97]/20 rounded-xl p-5 shadow-lg">
           <div className="flex items-center gap-2.5 mb-3">
-            <div className="w-8 h-8 rounded-full bg-[#a6e3a1]/15 flex items-center justify-center text-[#a6e3a1]">
+            <div className="w-8 h-8 rounded-full bg-[#3ddc97]/15 flex items-center justify-center text-[#3ddc97]">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M3 7.5l2.5 2.5L11 4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <span className="text-[13px] text-[#a6e3a1] font-semibold">쿼리 성공</span>
+            <span className="text-[13px] text-[#3ddc97] font-semibold">쿼리 성공</span>
           </div>
           <div className="space-y-1.5 text-[12px] text-[#cdd6f4]">
             <div className="flex justify-between"><span className="text-[#9399b2]">영향받은 행</span><span className="font-mono tabular-nums">{result.affectedRows}</span></div>
@@ -141,7 +141,7 @@ function ResultGrid({ result, error }: ResultGridProps) {
             <span className="px-1.5 py-0.5 rounded bg-[#f9e2af]/10 text-[#f9e2af] text-[9px] font-medium">TRUNCATED</span>
           )}
           <span className="h-3 w-px bg-white/5" />
-          <span className="font-mono tabular-nums text-[#89b4fa]">{result.durationMs}</span>
+          <span className="font-mono tabular-nums text-[#3ddc97]">{result.durationMs}</span>
           <span className="text-[#9399b2]">ms</span>
           {result.warningCount ? (
             <>
@@ -212,7 +212,7 @@ function ResultGrid({ result, error }: ResultGridProps) {
               return (
                 <div
                   key={virtualRow.key}
-                  className={`flex absolute left-0 hover:bg-[#89b4fa]/5 border-b border-white/[0.03] transition-colors ${
+                  className={`flex absolute left-0 hover:bg-[#3ddc97]/5 border-b border-white/[0.03] transition-colors ${
                     even ? '' : 'bg-white/[0.015]'
                   }`}
                   style={{
@@ -267,7 +267,7 @@ function ResultGrid({ result, error }: ResultGridProps) {
           >
             <div className="h-10 flex items-center justify-between px-4 border-b border-white/5 bg-black/20">
               <div className="flex items-center gap-2">
-                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="text-[#89b4fa]">
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" className="text-[#3ddc97]">
                   <rect x="1.5" y="1.5" width="11" height="11" rx="1.2" stroke="currentColor" strokeWidth="1.2" />
                   <path d="M4 5h6M4 7h6M4 9h4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                 </svg>

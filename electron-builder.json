@@ -8,6 +8,7 @@
   "files": [
     "dist/**/*",
     "dist-electron/**/*",
+    "icon/**/*",
     "node_modules/**/*",
     "!node_modules/**/*.{md,map,ts}",
     "!node_modules/**/test/**",
@@ -21,13 +22,16 @@
         "arch": ["x64"]
       }
     ],
+    "icon": "icon/custerm.ico",
     "signAndEditExecutable": false
   },
   "mac": {
-    "target": ["dmg"]
+    "target": ["dmg"],
+    "icon": "icon/custerm.icns"
   },
   "linux": {
     "target": ["AppImage"],
-    "category": "TerminalEmulator"
+    "category": "TerminalEmulator",
+    "icon": "icon/custerm_512.png"
   }
 }

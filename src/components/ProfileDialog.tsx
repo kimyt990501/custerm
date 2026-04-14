@@ -108,7 +108,7 @@ function ProfileDialog({ editProfile, onSave, onCancel }: ProfileDialogProps) {
   };
 
   const isSsh = profileType === 'ssh';
-  const accent = isSsh ? '#89b4fa' : '#fab387';
+  const accent = isSsh ? '#3ddc97' : '#fab387';
 
   return (
     <motion.div
@@ -172,7 +172,7 @@ function ProfileDialog({ editProfile, onSave, onCancel }: ProfileDialogProps) {
                 <TypeTab
                   active={profileType === 'ssh'}
                   onClick={() => setProfileType('ssh')}
-                  color="#89b4fa"
+                  color="#3ddc97"
                   icon={
                     <svg width="11" height="11" viewBox="0 0 14 14" fill="none">
                       <rect x="1.5" y="3" width="11" height="8" rx="1.2" stroke="currentColor" strokeWidth="1.3" />
@@ -236,7 +236,7 @@ function ProfileDialog({ editProfile, onSave, onCancel }: ProfileDialogProps) {
                     onChange={e => setPort(parseInt(e.target.value, 10) || 22)}
                     min={1}
                     max={65535}
-                    className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#89b4fa]/60 font-mono tabular-nums transition-colors"
+                    className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#3ddc97]/60 font-mono tabular-nums transition-colors"
                   />
                 </div>
               </div>
@@ -281,7 +281,7 @@ function ProfileDialog({ editProfile, onSave, onCancel }: ProfileDialogProps) {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     placeholder={editProfile ? '••••••••' : '비밀번호'}
-                    className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#89b4fa]/60 transition-colors"
+                    className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#3ddc97]/60 transition-colors"
                   />
                 </div>
               ) : (
@@ -314,7 +314,7 @@ function ProfileDialog({ editProfile, onSave, onCancel }: ProfileDialogProps) {
                       value={passphrase}
                       onChange={e => setPassphrase(e.target.value)}
                       placeholder="키에 패스프레이즈가 있는 경우"
-                      className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#89b4fa]/60 transition-colors"
+                      className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#3ddc97]/60 transition-colors"
                     />
                   </div>
                 </>
@@ -403,7 +403,7 @@ function AuthOption({
       onClick={onClick}
       className={`flex items-center gap-2 px-3 py-2 text-[11px] font-medium rounded-md border transition-colors ${
         active
-          ? 'bg-[#89b4fa]/10 border-[#89b4fa]/30 text-[#89b4fa]'
+          ? 'bg-[#3ddc97]/10 border-[#3ddc97]/30 text-[#3ddc97]'
           : 'bg-black/20 border-white/5 text-[#bac2de] hover:bg-white/5 hover:text-[#cdd6f4]'
       }`}
     >
@@ -432,7 +432,7 @@ function Field({
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#89b4fa]/60 transition-colors"
+        className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px] px-3 py-2 rounded-md border border-white/5 outline-none focus:border-[#3ddc97]/60 transition-colors"
       />
     </div>
   );

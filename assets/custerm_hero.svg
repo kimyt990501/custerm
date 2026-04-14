@@ -1,0 +1,54 @@
+<svg width="1280" height="480" viewBox="0 0 1280 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#262629" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <style>
+    .title { font-family: 'SF Pro Display', 'Helvetica Neue', -apple-system, sans-serif; font-weight: 700; font-size: 120px; fill: #fafafa; letter-spacing: -5px; }
+    .accent { fill: #34d399; }
+    .tag { font-family: 'SF Mono', 'Menlo', 'Consolas', monospace; font-weight: 400; font-size: 22px; fill: #a1a1aa; letter-spacing: 1px; }
+    .prompt { font-family: 'SF Mono', 'Menlo', 'Consolas', monospace; font-weight: 500; font-size: 22px; fill: #34d399; }
+  </style>
+
+  <!-- Background -->
+  <rect width="1280" height="480" fill="#0a0a0b"/>
+  <rect width="1280" height="480" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- Soft mint glow accent top-right -->
+  <circle cx="1100" cy="100" r="260" fill="#34d399" opacity="0.06"/>
+
+  <!-- Icon -->
+  <g transform="translate(90, 150)">
+    <rect width="180" height="180" rx="40" ry="40" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+    <path d="M 60 66 L 92 90 L 60 114"
+          stroke="#34d399" stroke-width="10"
+          stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <rect x="99" y="108" width="32" height="10" rx="5" ry="5" fill="#34d399"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="310" y="270" class="title">Cus<tspan class="accent">Term</tspan></text>
+
+  <!-- Tagline with prompt -->
+  <text x="313" y="325" class="prompt">$<tspan class="tag" dx="12">a terminal you can actually make your own</tspan></text>
+
+  <!-- Feature chips -->
+  <g transform="translate(313, 365)" font-family="'SF Mono','Menlo','Consolas',monospace" font-size="14" fill="#71717a">
+    <rect x="0" y="0" width="110" height="32" rx="16" fill="none" stroke="#27272a" stroke-width="1"/>
+    <text x="55" y="21" text-anchor="middle">multi-tab</text>
+
+    <rect x="122" y="0" width="80" height="32" rx="16" fill="none" stroke="#27272a" stroke-width="1"/>
+    <text x="162" y="21" text-anchor="middle">ssh</text>
+
+    <rect x="214" y="0" width="90" height="32" rx="16" fill="none" stroke="#27272a" stroke-width="1"/>
+    <text x="259" y="21" text-anchor="middle">sftp</text>
+
+    <rect x="316" y="0" width="160" height="32" rx="16" fill="none" stroke="#27272a" stroke-width="1"/>
+    <text x="396" y="21" text-anchor="middle">port forwarding</text>
+
+    <rect x="488" y="0" width="140" height="32" rx="16" fill="none" stroke="#27272a" stroke-width="1"/>
+    <text x="558" y="21" text-anchor="middle">tmux-friendly</text>
+  </g>
+</svg>

@@ -29,7 +29,7 @@ function TabBar({
         onClick={onToggleSidebar}
         className={`w-10 h-10 flex items-center justify-center transition-colors shrink-0 ${
           sidebarOpen
-            ? 'text-[#89b4fa]'
+            ? 'text-[#3ddc97]'
             : 'text-[#9399b2] hover:text-[#cdd6f4] hover:bg-white/5'
         }`}
         style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
@@ -191,7 +191,7 @@ function TabItem({
           ? 'bg-[#1e1e2e] text-[#cdd6f4] shadow-[0_1px_0_rgba(255,255,255,0.04)_inset]'
           : 'bg-transparent text-[#9399b2] hover:bg-white/5 hover:text-[#bac2de]'
         }
-        ${isDragOver ? 'ring-1 ring-[#89b4fa]/60' : ''}
+        ${isDragOver ? 'ring-1 ring-[#3ddc97]/60' : ''}
       `}
       style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
       draggable={!isEditing}
@@ -216,7 +216,7 @@ function TabItem({
     >
       {/* 활성 탭 하단 글로우 라인 */}
       {isActive && (
-        <div className="absolute left-3 right-3 bottom-0 h-[2px] rounded-full bg-[#89b4fa] shadow-[0_0_8px_rgba(137,180,250,0.7)]" />
+        <div className="absolute left-3 right-3 bottom-0 h-[2px] rounded-full bg-[#3ddc97] shadow-[0_0_8px_rgba(61,220,151,0.7)]" />
       )}
 
       {/* 탭 타입 아이콘 */}
@@ -230,7 +230,7 @@ function TabItem({
           onChange={e => setEditValue(e.target.value)}
           onBlur={commitRename}
           onKeyDown={handleKeyDown}
-          className="flex-1 min-w-0 bg-[#11111b] text-[#cdd6f4] text-[12px] px-1.5 py-0.5 rounded outline-none border border-[#89b4fa]/60"
+          className="flex-1 min-w-0 bg-[#11111b] text-[#cdd6f4] text-[12px] px-1.5 py-0.5 rounded outline-none border border-[#3ddc97]/60"
           onClick={e => e.stopPropagation()}
         />
       ) : (
@@ -255,7 +255,7 @@ function TabItem({
 
 function TabIcon({ type, active }: { type: Tab['type']; active: boolean }) {
   const color = active
-    ? (type === 'wsl' ? 'text-[#fab387]' : type === 'db' ? 'text-[#f38ba8]' : 'text-[#89b4fa]')
+    ? (type === 'wsl' ? 'text-[#fab387]' : type === 'db' ? 'text-[#f38ba8]' : 'text-[#3ddc97]')
     : 'text-[#585b70]';
 
   if (type === 'db') {

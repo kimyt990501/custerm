@@ -307,7 +307,7 @@ function TableDataView({
           onChange={e => setWhere(e.target.value)}
           onKeyDown={e => { if (e.key === 'Enter') applyFilter(); }}
           placeholder="id > 100"
-          className="bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-2 py-1 rounded-md border border-white/5 outline-none focus:border-[#89b4fa]/60 font-mono transition-colors"
+          className="bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-2 py-1 rounded-md border border-white/5 outline-none focus:border-[#3ddc97]/60 font-mono transition-colors"
           style={{ width: 200 }}
         />
 
@@ -318,13 +318,13 @@ function TableDataView({
           onChange={e => setOrderBy(e.target.value)}
           onKeyDown={e => { if (e.key === 'Enter') applyFilter(); }}
           placeholder="id DESC"
-          className="bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-2 py-1 rounded-md border border-white/5 outline-none focus:border-[#89b4fa]/60 font-mono transition-colors"
+          className="bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-2 py-1 rounded-md border border-white/5 outline-none focus:border-[#3ddc97]/60 font-mono transition-colors"
           style={{ width: 130 }}
         />
 
         <button
           onClick={applyFilter}
-          className="px-2.5 py-1 text-[11px] rounded-md bg-[#89b4fa] text-[#1e1e2e] hover:bg-[#74c7ec] font-medium shadow-sm shadow-[#89b4fa]/20 transition-colors"
+          className="px-2.5 py-1 text-[11px] rounded-md bg-[#3ddc97] text-[#1e1e2e] hover:bg-[#74c7ec] font-medium shadow-sm shadow-[#3ddc97]/20 transition-colors"
         >
           적용
         </button>
@@ -381,7 +381,7 @@ function TableDataView({
 
         {/* 로딩 스피너 */}
         {loading && (
-          <span className="flex items-center gap-1 text-[10px] text-[#89b4fa] ml-1" title="로딩 중">
+          <span className="flex items-center gap-1 text-[10px] text-[#3ddc97] ml-1" title="로딩 중">
             <svg className="animate-spin" width="12" height="12" viewBox="0 0 12 12" fill="none">
               <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.5" opacity="0.25" />
               <path d="M10.5 6a4.5 4.5 0 0 0-4.5-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -405,7 +405,7 @@ function TableDataView({
         {/* 행 조작 */}
         <button
           onClick={addNewRow}
-          className="flex items-center gap-1 px-2.5 py-1 text-[11px] rounded-md bg-[#a6e3a1]/10 text-[#a6e3a1] hover:bg-[#a6e3a1]/20 border border-[#a6e3a1]/20 font-medium transition-colors"
+          className="flex items-center gap-1 px-2.5 py-1 text-[11px] rounded-md bg-[#3ddc97]/10 text-[#3ddc97] hover:bg-[#3ddc97]/20 border border-[#3ddc97]/20 font-medium transition-colors"
           title="행 추가"
         >
           <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -486,7 +486,7 @@ function TableDataView({
           {/* 페이지 이동 등 기존 데이터 위에 로딩 오버레이 */}
           {loading && (
             <div className="absolute inset-0 z-20 bg-[#0b0b14]/60 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1e1e2e]/90 border border-[#313244] text-[11px] text-[#89b4fa] shadow-lg">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1e1e2e]/90 border border-[#313244] text-[11px] text-[#3ddc97] shadow-lg">
                 <svg className="animate-spin" width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" opacity="0.25" />
                   <path d="M12.5 7a5.5 5.5 0 0 0-5.5-5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -546,7 +546,7 @@ function TableDataView({
                     <div
                       key={vi.key}
                       className={`flex absolute left-0 border-b border-white/[0.03] transition-colors ${
-                        isDeleted ? 'bg-[#f38ba8]/15 line-through' : isSelected ? 'bg-[#89b4fa]/10' : `hover:bg-[#89b4fa]/5 ${even ? '' : 'bg-white/[0.015]'}`
+                        isDeleted ? 'bg-[#f38ba8]/15 line-through' : isSelected ? 'bg-[#3ddc97]/10' : `hover:bg-[#3ddc97]/5 ${even ? '' : 'bg-white/[0.015]'}`
                       }`}
                       style={{
                         top: 0,
@@ -560,7 +560,7 @@ function TableDataView({
                           type="checkbox"
                           checked={isSelected}
                           onChange={() => toggleRowSelect(idx)}
-                          className="accent-[#89b4fa]"
+                          className="accent-[#3ddc97]"
                         />
                       </div>
                       <div
@@ -601,7 +601,7 @@ function TableDataView({
                 return (
                   <div
                     key={vi.key}
-                    className="flex absolute left-0 border-b border-[#a6e3a1]/20 bg-[#a6e3a1]/10"
+                    className="flex absolute left-0 border-b border-[#3ddc97]/20 bg-[#3ddc97]/10"
                     style={{
                       top: 0,
                       transform: `translateY(${vi.start}px)`,
@@ -621,7 +621,7 @@ function TableDataView({
                       </button>
                     </div>
                     <div
-                      className="px-2 py-1 text-[#a6e3a1] border-r border-white/5 shrink-0 text-right font-semibold text-[10px]"
+                      className="px-2 py-1 text-[#3ddc97] border-r border-white/5 shrink-0 text-right font-semibold text-[10px]"
                       style={{ width: ROW_NUM_WIDTH }}
                     >
                       NEW
@@ -689,7 +689,7 @@ function Cell({
   if (isEditing) {
     return (
       <div
-        className="px-1 py-0.5 border-r border-white/5 shrink-0 bg-[#89b4fa]/10"
+        className="px-1 py-0.5 border-r border-white/5 shrink-0 bg-[#3ddc97]/10"
         style={{ width: COL_WIDTH }}
       >
         <input
@@ -705,7 +705,7 @@ function Cell({
               onCommit('', true); // Ctrl+Space → NULL
             }
           }}
-          className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-1.5 py-0.5 rounded border border-[#89b4fa] outline-none font-mono ring-2 ring-[#89b4fa]/30"
+          className="w-full bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-1.5 py-0.5 rounded border border-[#3ddc97] outline-none font-mono ring-2 ring-[#3ddc97]/30"
         />
       </div>
     );

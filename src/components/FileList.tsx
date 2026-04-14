@@ -177,7 +177,7 @@ function FileList({
 
   return (
     <div
-      className={`flex flex-col h-full select-none transition-colors ${dragOver ? 'bg-[#89b4fa]/5' : ''}`}
+      className={`flex flex-col h-full select-none transition-colors ${dragOver ? 'bg-[#3ddc97]/5' : ''}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -187,8 +187,8 @@ function FileList({
       <div className="flex items-center gap-2 px-3 py-2 border-b border-white/5 bg-black/15">
         <span className={`px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded shrink-0 ${
           side === 'local'
-            ? 'bg-[#a6e3a1]/15 text-[#a6e3a1]'
-            : 'bg-[#89b4fa]/15 text-[#89b4fa]'
+            ? 'bg-[#3ddc97]/15 text-[#3ddc97]'
+            : 'bg-[#3ddc97]/15 text-[#3ddc97]'
         }`}>
           {side === 'local' ? '로컬' : '원격'}
         </span>
@@ -245,7 +245,7 @@ function FileList({
                       <FolderIcon />
                       <input
                         autoFocus
-                        className="bg-[#313244] text-[#cdd6f4] text-xs px-1 py-0.5 rounded border border-[#45475a] outline-none focus:border-[#89b4fa] flex-1"
+                        className="bg-[#313244] text-[#cdd6f4] text-xs px-1 py-0.5 rounded border border-[#45475a] outline-none focus:border-[#3ddc97] flex-1"
                         value={mkdirValue}
                         onChange={e => setMkdirValue(e.target.value)}
                         onKeyDown={e => {
@@ -265,7 +265,7 @@ function FileList({
                 <tr
                   key={file.filename}
                   className={`hover:bg-white/[0.03] cursor-pointer ${
-                    selectedFiles.has(file.filename) ? 'bg-[#89b4fa]/10' : ''
+                    selectedFiles.has(file.filename) ? 'bg-[#3ddc97]/10' : ''
                   }`}
                   onClick={e => handleClick(file.filename, e)}
                   onDoubleClick={() => handleDoubleClick(file)}
@@ -279,7 +279,7 @@ function FileList({
                       {renameTarget === file.filename ? (
                         <input
                           autoFocus
-                          className="bg-[#313244] text-[#cdd6f4] text-xs px-1 py-0.5 rounded border border-[#45475a] outline-none focus:border-[#89b4fa] flex-1 min-w-0"
+                          className="bg-[#313244] text-[#cdd6f4] text-xs px-1 py-0.5 rounded border border-[#45475a] outline-none focus:border-[#3ddc97] flex-1 min-w-0"
                           value={renameValue}
                           onChange={e => setRenameValue(e.target.value)}
                           onKeyDown={e => {
@@ -289,7 +289,7 @@ function FileList({
                           onBlur={handleRenameSubmit}
                         />
                       ) : (
-                        <span className={`truncate ${file.isDirectory ? 'text-[#89b4fa]' : 'text-[#cdd6f4]'}`}>
+                        <span className={`truncate ${file.isDirectory ? 'text-[#3ddc97]' : 'text-[#cdd6f4]'}`}>
                           {file.filename}
                         </span>
                       )}

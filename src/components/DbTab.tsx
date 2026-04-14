@@ -166,7 +166,7 @@ function DbTab({ active, dbProfileId, profileName }: DbTabProps) {
         />
       </div>
       <div
-        className="w-px bg-white/5 hover:bg-[#89b4fa]/50 cursor-col-resize shrink-0 transition-colors"
+        className="w-px bg-white/5 hover:bg-[#3ddc97]/50 cursor-col-resize shrink-0 transition-colors"
         onMouseDown={handleTreeResize}
       />
 
@@ -199,7 +199,7 @@ function DbTab({ active, dbProfileId, profileName }: DbTabProps) {
           <div className="flex-1" />
           {db.serverVersion && (
             <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#f38ba8]/10 border border-[#f38ba8]/15 text-[#f38ba8] text-[10px] font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#a6e3a1] shadow-[0_0_4px_rgba(166,227,161,0.6)]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#3ddc97] shadow-[0_0_4px_rgba(61,220,151,0.6)]" />
               MySQL {db.serverVersion}
             </div>
           )}
@@ -236,7 +236,7 @@ function DbTab({ active, dbProfileId, profileName }: DbTabProps) {
               <select
                 value={dbContext}
                 onChange={e => setDbContext(e.target.value)}
-                className="bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-2 py-1 rounded-md border border-white/5 outline-none focus:border-[#89b4fa]/60 transition-colors"
+                className="bg-[#0b0b14] text-[#cdd6f4] text-[11px] px-2 py-1 rounded-md border border-white/5 outline-none focus:border-[#3ddc97]/60 transition-colors"
               >
                 <option value="">(없음)</option>
                 {db.databases.map(d => (
@@ -244,7 +244,7 @@ function DbTab({ active, dbProfileId, profileName }: DbTabProps) {
                 ))}
               </select>
               {running && (
-                <div className="ml-auto flex items-center gap-1.5 text-[11px] text-[#89b4fa]">
+                <div className="ml-auto flex items-center gap-1.5 text-[11px] text-[#3ddc97]">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="animate-spin">
                     <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.3" opacity="0.3" />
                     <path d="M10.5 6A4.5 4.5 0 0 0 6 1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
@@ -264,7 +264,7 @@ function DbTab({ active, dbProfileId, profileName }: DbTabProps) {
             </div>
 
             <div
-              className="h-1 bg-white/5 hover:bg-[#89b4fa]/50 cursor-row-resize shrink-0 transition-colors"
+              className="h-1 bg-white/5 hover:bg-[#3ddc97]/50 cursor-row-resize shrink-0 transition-colors"
               onMouseDown={handleEditorResize}
             />
 
