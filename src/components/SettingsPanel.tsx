@@ -53,7 +53,7 @@ function SettingsPanel({ settings, themeNames, onUpdate, onClose }: SettingsPane
           </nav>
           <div className="px-5 py-3 border-t border-white/5 text-[10px] text-[#9399b2] leading-relaxed">
             <div className="text-[#bac2de] font-medium">Custerm</div>
-            <div>v0.10 · Phase 10</div>
+            <div>v0.1.0</div>
           </div>
         </div>
 
@@ -421,7 +421,7 @@ function AboutTab() {
           <div>
             <div className="text-lg font-semibold text-[#cdd6f4]">Custerm</div>
             <div className="text-[13px] text-[#bac2de]">Multi-tab SSH · WSL · MySQL 클라이언트</div>
-            <div className="text-[11px] text-[#9399b2] mt-1">v0.10.0 — Phase 10</div>
+            <div className="text-[11px] text-[#9399b2] mt-1">v0.1.0</div>
           </div>
         </div>
       </Card>
