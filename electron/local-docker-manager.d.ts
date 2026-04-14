@@ -1,0 +1,10 @@
+import { type DockerListResult } from './docker-types';
+export declare function listLocalDocker(): Promise<DockerListResult>;
+export declare function startLocalContainer(id: string): Promise<void>;
+export declare function stopLocalContainer(id: string): Promise<void>;
+export declare function restartLocalContainer(id: string): Promise<void>;
+export declare function removeLocalContainer(id: string, force: boolean): Promise<void>;
+export declare function removeLocalImage(id: string, force: boolean): Promise<void>;
+export declare function pullLocalImage(ref: string): Promise<string>;
+export declare function execIntoLocalContainer(ptyId: string, name: string, shell: string): void;
+export declare function logsLocalContainer(ptyId: string, name: string): void;

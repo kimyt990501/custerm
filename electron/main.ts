@@ -78,6 +78,24 @@ import {
   logsWslContainer,
 } from './wsl-docker-manager';
 import {
+  listLocalTmuxSessions,
+  attachLocalTmuxSession,
+  createLocalTmuxSession,
+  detachLocalTmux,
+  killLocalTmuxSession,
+} from './local-tmux-manager';
+import {
+  listLocalDocker,
+  startLocalContainer,
+  stopLocalContainer,
+  restartLocalContainer,
+  removeLocalContainer,
+  removeLocalImage,
+  pullLocalImage,
+  execIntoLocalContainer,
+  logsLocalContainer,
+} from './local-docker-manager';
+import {
   listDbProfiles,
   createDbProfile,
   updateDbProfile,
@@ -521,6 +539,66 @@ ipcMain.on('wsl-docker:exec', (_event, ptyId: string, name: string, shell: strin
 
 ipcMain.on('wsl-docker:logs', (_event, ptyId: string, name: string) => {
   logsWslContainer(ptyId, name);
+});
+
+// --- Local tmux IPC 핸들러 ---
+
+ipcMain.handle('local-tmux:list', async () => {
+  return listLocalTmuxSessions();
+});
+
+ipcMain.on('local-tmux:attach', (_event, ptyId: string, sessionName: string) => {
+  attachLocalTmuxSession(ptyId, sessionName);
+});
+
+ipcMain.on('local-tmux:new', (_event, ptyId: string, sessionName?: string) => {
+  createLocalTmuxSession(ptyId, sessionName);
+});
+
+ipcMain.on('local-tmux:detach', (_event, ptyId: string) => {
+  detachLocalTmux(ptyId);
+});
+
+ipcMain.handle('local-tmux:kill', async (_event, sessionName: string) => {
+  return killLocalTmuxSession(sessionName);
+});
+
+// --- Local Docker IPC 핸들러 ---
+
+ipcMain.handle('local-docker:list', async () => {
+  return listLocalDocker();
+});
+
+ipcMain.handle('local-docker:start', async (_event, id: string) => {
+  return startLocalContainer(id);
+});
+
+ipcMain.handle('local-docker:stop', async (_event, id: string) => {
+  return stopLocalContainer(id);
+});
+
+ipcMain.handle('local-docker:restart', async (_event, id: string) => {
+  return restartLocalContainer(id);
+});
+
+ipcMain.handle('local-docker:remove', async (_event, id: string, force: boolean) => {
+  return removeLocalContainer(id, force);
+});
+
+ipcMain.handle('local-docker:removeImage', async (_event, id: string, force: boolean) => {
+  return removeLocalImage(id, force);
+});
+
+ipcMain.handle('local-docker:pullImage', async (_event, ref: string) => {
+  return pullLocalImage(ref);
+});
+
+ipcMain.on('local-docker:exec', (_event, ptyId: string, name: string, shell: string) => {
+  execIntoLocalContainer(ptyId, name, shell);
+});
+
+ipcMain.on('local-docker:logs', (_event, ptyId: string, name: string) => {
+  logsLocalContainer(ptyId, name);
 });
 
 // --- DB 프로필 IPC 핸들러 ---

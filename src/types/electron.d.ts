@@ -138,9 +138,31 @@ interface SftpAPI {
   onTransferError: (callback: (transferId: string, error: string) => void) => () => void;
 }
 
+interface LocalTmuxAPI {
+  list: () => Promise<TmuxListResult>;
+  attach: (ptyId: string, sessionName: string) => void;
+  new: (ptyId: string, sessionName?: string) => void;
+  detach: (ptyId: string) => void;
+  kill: (sessionName: string) => Promise<void>;
+}
+
+interface LocalDockerAPI {
+  list: () => Promise<DockerListResult>;
+  start: (id: string) => Promise<void>;
+  stop: (id: string) => Promise<void>;
+  restart: (id: string) => Promise<void>;
+  remove: (id: string, force: boolean) => Promise<void>;
+  removeImage: (id: string, force: boolean) => Promise<void>;
+  pullImage: (ref: string) => Promise<string>;
+  exec: (ptyId: string, name: string, shell: string) => void;
+  logs: (ptyId: string, name: string) => void;
+}
+
 interface LocalAPI {
   readdir: (localPath: string) => Promise<SftpFileEntry[]>;
   homedir: () => Promise<string>;
+  tmux: LocalTmuxAPI;
+  docker: LocalDockerAPI;
 }
 
 interface SettingsAPI {

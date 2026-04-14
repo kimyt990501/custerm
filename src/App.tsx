@@ -7,8 +7,13 @@ import SftpPanel from './components/SftpPanel';
 import PortForwardingPanel from './components/PortForwardingPanel';
 import TmuxPanel from './components/TmuxPanel';
 import WslTmuxPanel from './components/WslTmuxPanel';
+import LocalTmuxPanel from './components/LocalTmuxPanel';
 import DockerPanel from './components/DockerPanel';
 import WslDockerPanel from './components/WslDockerPanel';
+import LocalDockerPanel from './components/LocalDockerPanel';
+
+const IS_WINDOWS = /Windows/i.test(navigator.userAgent);
+const LOCAL_PANELS_ENABLED = !IS_WINDOWS;
 import DbTab from './components/DbTab';
 import CommandPalette from './components/CommandPalette';
 import ProfileDialog from './components/ProfileDialog';
@@ -375,7 +380,7 @@ function App() {
             })}
 
             {/* SSH/WSL 탭일 때 토글 버튼 (Zen mode 아닐 때만) */}
-            {!zenMode && (activeTab?.type === 'ssh' || activeTab?.type === 'wsl') && (
+            {!zenMode && (activeTab?.type === 'ssh' || activeTab?.type === 'wsl' || (activeTab?.type === 'local' && LOCAL_PANELS_ENABLED)) && (
               <div className="absolute bottom-2 right-2 z-10 flex gap-1">
                 {activeTab.type === 'ssh' && (
                   <>
@@ -497,12 +502,13 @@ function App() {
           );
         })}
 
-        {/* tmux 패널 — 우측 사이드 패널 (SSH + WSL) */}
+        {/* tmux 패널 — 우측 사이드 패널 (SSH + WSL + Local) */}
         {tabs.map(tab => {
           if (!tmuxOpenTabs.has(tab.id)) return null;
           if (tab.type === 'ssh' && !tab.sshSessionId) return null;
           if (tab.type === 'wsl' && !tab.distro) return null;
-          if (tab.type !== 'ssh' && tab.type !== 'wsl') return null;
+          if (tab.type === 'local' && !LOCAL_PANELS_ENABLED) return null;
+          if (tab.type !== 'ssh' && tab.type !== 'wsl' && tab.type !== 'local') return null;
           const isVisible = tab.id === activeTabId;
           return (
             <div
@@ -516,19 +522,22 @@ function App() {
             >
               {tab.type === 'ssh' ? (
                 <TmuxPanel sshSessionId={tab.sshSessionId!} />
-              ) : (
+              ) : tab.type === 'wsl' ? (
                 <WslTmuxPanel distro={tab.distro!} ptyId={tab.ptyId} />
+              ) : (
+                <LocalTmuxPanel ptyId={tab.ptyId} />
               )}
             </div>
           );
         })}
 
-        {/* Docker 패널 — 우측 사이드 패널 (SSH + WSL) */}
+        {/* Docker 패널 — 우측 사이드 패널 (SSH + WSL + Local) */}
         {tabs.map(tab => {
           if (!dockerOpenTabs.has(tab.id)) return null;
           if (tab.type === 'ssh' && !tab.sshSessionId) return null;
           if (tab.type === 'wsl' && !tab.distro) return null;
-          if (tab.type !== 'ssh' && tab.type !== 'wsl') return null;
+          if (tab.type === 'local' && !LOCAL_PANELS_ENABLED) return null;
+          if (tab.type !== 'ssh' && tab.type !== 'wsl' && tab.type !== 'local') return null;
           const isVisible = tab.id === activeTabId;
           return (
             <div
@@ -542,8 +551,10 @@ function App() {
             >
               {tab.type === 'ssh' ? (
                 <DockerPanel sshSessionId={tab.sshSessionId!} />
-              ) : (
+              ) : tab.type === 'wsl' ? (
                 <WslDockerPanel distro={tab.distro!} ptyId={tab.ptyId} />
+              ) : (
+                <LocalDockerPanel ptyId={tab.ptyId} />
               )}
             </div>
           );

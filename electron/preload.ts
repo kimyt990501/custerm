@@ -196,6 +196,44 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
     homedir: (): Promise<string> =>
       ipcRenderer.invoke('local:homedir'),
+
+    tmux: {
+      list: (): Promise<{ tmuxAvailable: boolean; sessions: unknown[] }> =>
+        ipcRenderer.invoke('local-tmux:list'),
+
+      attach: (ptyId: string, sessionName: string): void =>
+        ipcRenderer.send('local-tmux:attach', ptyId, sessionName),
+
+      new: (ptyId: string, sessionName?: string): void =>
+        ipcRenderer.send('local-tmux:new', ptyId, sessionName),
+
+      detach: (ptyId: string): void =>
+        ipcRenderer.send('local-tmux:detach', ptyId),
+
+      kill: (sessionName: string): Promise<void> =>
+        ipcRenderer.invoke('local-tmux:kill', sessionName),
+    },
+
+    docker: {
+      list: (): Promise<unknown> =>
+        ipcRenderer.invoke('local-docker:list'),
+      start: (id: string): Promise<void> =>
+        ipcRenderer.invoke('local-docker:start', id),
+      stop: (id: string): Promise<void> =>
+        ipcRenderer.invoke('local-docker:stop', id),
+      restart: (id: string): Promise<void> =>
+        ipcRenderer.invoke('local-docker:restart', id),
+      remove: (id: string, force: boolean): Promise<void> =>
+        ipcRenderer.invoke('local-docker:remove', id, force),
+      removeImage: (id: string, force: boolean): Promise<void> =>
+        ipcRenderer.invoke('local-docker:removeImage', id, force),
+      pullImage: (ref: string): Promise<string> =>
+        ipcRenderer.invoke('local-docker:pullImage', ref),
+      exec: (ptyId: string, name: string, shell: string): void =>
+        ipcRenderer.send('local-docker:exec', ptyId, name, shell),
+      logs: (ptyId: string, name: string): void =>
+        ipcRenderer.send('local-docker:logs', ptyId, name),
+    },
   },
 
   // --- 포트 포워딩 API ---

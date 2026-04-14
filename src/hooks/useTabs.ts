@@ -15,6 +15,13 @@ export interface Tab {
 
 let nextTabId = 0;
 
+function getDefaultLocalTabTitle(): string {
+  const ua = navigator.userAgent;
+  if (/Windows/i.test(ua)) return 'PowerShell';
+  if (/Mac OS X|Macintosh/i.test(ua)) return 'zsh';
+  return 'bash';
+}
+
 function createTab(
   title: string,
   type: 'local' | 'ssh' | 'wsl' | 'db' = 'local',
@@ -37,13 +44,13 @@ function createTab(
 
 export function useTabs() {
   const [tabs, setTabs] = useState<Tab[]>(() => {
-    const initial = createTab('PowerShell', 'local');
+    const initial = createTab(getDefaultLocalTabTitle(), 'local');
     return [initial];
   });
   const [activeTabId, setActiveTabId] = useState<string>(() => String(nextTabId));
 
   const addTab = useCallback((title?: string) => {
-    const tab = createTab(title || 'PowerShell', 'local');
+    const tab = createTab(title || getDefaultLocalTabTitle(), 'local');
     setTabs(prev => [...prev, tab]);
     setActiveTabId(tab.id);
     return tab.id;
