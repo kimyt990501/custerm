@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* 전반적으로 글씨가 더 또렷하게 — 다크 배경에서 얇은 글리프가 흐려보이는 문제 완화 */
+    font-weight: 450;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-[#0b0b14] text-[#cdd6f4] overflow-hidden;
+    font-weight: 450;
+  }
+  /* font-medium/semibold가 적용된 곳은 살짝 더 강조 */
+  .font-medium {
+    font-weight: 550 !important;
+  }
+  .font-semibold {
+    font-weight: 650 !important;
+  }
+  /* 기본 포커스 스타일 제거 (컴포넌트별 링 재정의) */
+  *:focus {
+    outline: none;
+  }
+}
+
+/* -------------------------------------------------------------
+ *  공용 스크롤바 — 얇고 반투명, hover 시 강조
+ * ------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(166, 173, 200, 0.15);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(166, 173, 200, 0.35);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* -------------------------------------------------------------
+ *  디자인 토큰 — 앱 전반 공통 클래스
+ *    배경: #11111b (baseDeep) > #181825 (baseMid) > #1e1e2e (baseHigh)
+ *    경계: white/5 (subtle), white/10 (medium)
+ *    텍스트: #cdd6f4 (primary) / #a6adc8 (secondary) / #6c7086 (muted)
+ *    액센트: #f38ba8 (pink) / #89b4fa (blue) / #a6e3a1 (green)
+ * ------------------------------------------------------------- */
+@layer utilities {
+  /* 유리 패널 */
+  .glass-panel {
+    @apply bg-[#181825]/70 backdrop-blur-md border border-white/5;
+  }
+
+  /* 카드 — 설정창/대화상자 등에서 쓰는 기본 섹션 */
+  .ui-card {
+    @apply rounded-xl bg-[#11111b]/60 border border-white/5 transition-colors;
+  }
+  .ui-card-interactive {
+    @apply ui-card hover:border-white/10;
+  }
+
+  /* 섹션 헤더 — 사이드바/패널 최상단에 쓰는 작은 타이틀 바 */
+  .ui-section-header {
+    @apply h-9 flex items-center justify-between px-3
+           text-[11px] font-medium text-[#bac2de] tracking-wide uppercase
+           border-b border-white/5 bg-gradient-to-b from-[#181825]/80 to-[#11111b]/60;
+  }
+
+  /* 리스트 아이템 (사이드바 프로필, 패널 아이템 공용) */
+  .ui-list-item {
+    @apply px-3 py-2 flex items-center gap-2.5 cursor-pointer
+           transition-all duration-150 rounded-lg mx-1
+           text-[#cdd6f4] hover:bg-white/5;
+  }
+  .ui-list-item-active {
+    @apply bg-gradient-to-r from-[#f38ba8]/10 to-transparent ring-1 ring-[#f38ba8]/25;
+  }
+
+  /* 기본 입력 */
+  .ui-input {
+    @apply w-full bg-[#0b0b14] text-[#cdd6f4] text-[12px]
+           px-3 py-2 rounded-lg border border-white/5 outline-none
+           placeholder-[#585b70]
+           focus:border-[#89b4fa]/60 focus:ring-2 focus:ring-[#89b4fa]/20
+           transition-all;
+  }
+  .ui-input-sm {
+    @apply ui-input text-[11px] py-1.5 rounded-md;
+  }
+
+  /* 버튼 계열 */
+  .ui-btn {
+    @apply inline-flex items-center justify-center gap-1.5
+           px-3 py-1.5 text-[12px] font-medium rounded-lg
+           transition-all duration-150 select-none
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .ui-btn-primary {
+    @apply ui-btn bg-[#89b4fa] text-[#11111b]
+           hover:bg-[#74c7ec] active:scale-[0.98]
+           shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_4px_12px_rgba(137,180,250,0.25)];
+  }
+  .ui-btn-accent {
+    @apply ui-btn bg-[#f38ba8] text-[#11111b]
+           hover:bg-[#eba0ac] active:scale-[0.98]
+           shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_4px_12px_rgba(243,139,168,0.25)];
+  }
+  .ui-btn-success {
+    @apply ui-btn bg-[#a6e3a1] text-[#11111b]
+           hover:bg-[#94d990] active:scale-[0.98]
+           shadow-[0_1px_0_rgba(255,255,255,0.15)_inset,0_4px_12px_rgba(166,227,161,0.22)];
+  }
+  .ui-btn-ghost {
+    @apply ui-btn text-[#bac2de] hover:text-[#cdd6f4]
+           bg-white/[0.03] hover:bg-white/[0.07]
+           border border-white/5 hover:border-white/10;
+  }
+  .ui-btn-icon {
+    @apply w-7 h-7 flex items-center justify-center rounded-lg
+           text-[#9399b2] hover:text-[#cdd6f4] hover:bg-white/5
+           transition-colors;
+  }
+  .ui-btn-icon-sm {
+    @apply w-6 h-6 flex items-center justify-center rounded-md
+           text-[#9399b2] hover:text-[#cdd6f4] hover:bg-white/5
+           transition-colors;
+  }
+
+  /* 체크/단축키 배지 */
+  .ui-pill {
+    @apply inline-flex items-center px-2 py-0.5 rounded-md
+           bg-[#313244]/70 text-[#cdd6f4] text-[10px] font-mono tabular-nums
+           border border-white/5;
+  }
+
+  /* 포커스 하이라이트 — 링만 필요할 때 */
+  .ui-focus-ring {
+    @apply focus:ring-2 focus:ring-[#89b4fa]/40 focus:border-[#89b4fa]/60;
+  }
+
+  /* 희미한 디바이더 */
+  .ui-divider {
+    @apply h-px bg-gradient-to-r from-transparent via-white/5 to-transparent;
+  }
+  .ui-divider-v {
+    @apply w-px bg-gradient-to-b from-transparent via-white/5 to-transparent;
+  }
+
+  /* 상호작용 가능한 행의 포커스 링 (키보드 네비 대비) */
+  .ui-row-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#89b4fa]/40;
+  }
+}

@@ -1,0 +1,70 @@
+# ---- Dependencies ----
+node_modules/
+
+# ---- Build outputs ----
+# Vite (renderer) 번들
+dist/
+# 컴파일된 electron main + preload
+dist-electron/
+# electron-builder 패키징 결과물 / 인스톨러
+release/
+
+# ---- TypeScript incremental / 자동 생성 ----
+*.tsbuildinfo
+# vite.config.ts 컴파일 산출물
+vite.config.d.ts
+vite.config.js
+
+# ---- Environment / secrets ----
+.env
+.env.*
+!.env.example
+
+# ---- Logs ----
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- OS noise ----
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ---- Editors / IDEs ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# ---- Claude Code 로컬 상태 ----
+.claude/
+
+# ---- Coverage / test output ----
+coverage/
+*.lcov
+.nyc_output/
+
+# ---- electron-builder 산출물 (루트에 떨어질 때 대비) ----
+*.exe
+*.dmg
+*.pkg
+*.AppImage
+*.deb
+*.rpm
+*.snap
+*.blockmap
+latest.yml
+latest-mac.yml
+latest-linux.yml
+
+# ---- 기타 ----
+*.tgz
+.cache/
+.parcel-cache/
+.eslintcache

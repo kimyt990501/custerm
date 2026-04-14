@@ -1,0 +1,33 @@
+{
+  "appId": "com.custerm.app",
+  "productName": "Custerm",
+  "directories": {
+    "output": "release"
+  },
+  "npmRebuild": false,
+  "files": [
+    "dist/**/*",
+    "dist-electron/**/*",
+    "node_modules/**/*",
+    "!node_modules/**/*.{md,map,ts}",
+    "!node_modules/**/test/**",
+    "!node_modules/**/docs/**",
+    "!node_modules/**/.github/**"
+  ],
+  "win": {
+    "target": [
+      {
+        "target": "dir",
+        "arch": ["x64"]
+      }
+    ],
+    "signAndEditExecutable": false
+  },
+  "mac": {
+    "target": ["dmg"]
+  },
+  "linux": {
+    "target": ["AppImage"],
+    "category": "TerminalEmulator"
+  }
+}
