@@ -18,16 +18,44 @@
   "win": {
     "target": [
       {
-        "target": "dir",
+        "target": "nsis",
         "arch": ["x64"]
       }
     ],
     "icon": "icon/custerm.ico",
-    "signAndEditExecutable": false
+    "artifactName": "${productName}-Setup-${version}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "allowElevation": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "Custerm",
+    "installerIcon": "icon/custerm.ico",
+    "uninstallerIcon": "icon/custerm.ico",
+    "installerHeaderIcon": "icon/custerm.ico",
+    "deleteAppDataOnUninstall": false
   },
   "mac": {
-    "target": ["dmg"],
-    "icon": "icon/custerm.icns"
+    "target": [
+      {
+        "target": "dmg",
+        "arch": ["arm64"]
+      }
+    ],
+    "icon": "icon/custerm.icns",
+    "category": "public.app-category.developer-tools",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "identity": null,
+    "extendInfo": {
+      "NSHighResolutionCapable": true
+    }
+  },
+  "dmg": {
+    "artifactName": "${productName}-${version}-arm64.${ext}"
   },
   "linux": {
     "target": ["AppImage"],
