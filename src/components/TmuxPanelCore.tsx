@@ -214,8 +214,8 @@ function TmuxPanelCore(props: TmuxPanelCoreProps) {
     if (next) setMouseHintSeen(true);
   }, [hasActive, onSetMouse]);
 
-  const btnBase = 'px-2 py-1 text-[10px] font-medium rounded-md border transition-colors';
-  const btnEnabled = 'bg-white/[0.04] text-[#bac2de] hover:bg-white/[0.08] border-white/5';
+  const btnBase = 'flex items-center gap-1 px-2 py-1 text-[10px] font-medium rounded-md border transition-colors';
+  const btnEnabled = 'bg-white/[0.04] text-[#bac2de] hover:bg-white/[0.08] hover:text-[#cdd6f4] border-white/5';
   const btnDisabled = 'bg-white/[0.02] text-[#6c7086] border-white/5 cursor-not-allowed';
   const btnClass = hasActive ? `${btnBase} ${btnEnabled}` : `${btnBase} ${btnDisabled}`;
 
@@ -270,8 +270,14 @@ function TmuxPanelCore(props: TmuxPanelCoreProps) {
             Pane {hasActive ? `(${activeSessionName})` : '(연결된 세션 없음)'}
           </div>
           <div className="flex flex-wrap gap-1">
-            <button disabled={!hasActive} onClick={() => send('\x02%')} className={btnClass} title="Ctrl+b %">⬌ 가로분할</button>
-            <button disabled={!hasActive} onClick={() => send('\x02"')} className={btnClass} title='Ctrl+b "'>⬍ 세로분할</button>
+            <button disabled={!hasActive} onClick={() => send('\x02%')} className={btnClass} title="Ctrl+b %">
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"><rect x="1.5" y="2" width="11" height="10" rx="1"/><line x1="7" y1="2" x2="7" y2="12"/></svg>
+              가로분할
+            </button>
+            <button disabled={!hasActive} onClick={() => send('\x02"')} className={btnClass} title='Ctrl+b "'>
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"><rect x="1.5" y="2" width="11" height="10" rx="1"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg>
+              세로분할
+            </button>
             <button
               disabled={!hasActive}
               onClick={() => {
@@ -282,14 +288,29 @@ function TmuxPanelCore(props: TmuxPanelCoreProps) {
               }}
               className={btnClass}
               title="Ctrl+b x"
-            >✕ Pane 닫기</button>
-            <button disabled={!hasActive} onClick={() => send('\x02o')} className={btnClass} title="Ctrl+b o">↻ 다음 pane</button>
-            <button disabled={!hasActive} onClick={() => send('\x02z')} className={btnClass} title="Ctrl+b z">⛶ Zoom</button>
+            >
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"><line x1="3.5" y1="3.5" x2="10.5" y2="10.5"/><line x1="10.5" y1="3.5" x2="3.5" y2="10.5"/></svg>
+              Pane 닫기
+            </button>
+            <button disabled={!hasActive} onClick={() => send('\x02o')} className={btnClass} title="Ctrl+b o">
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 7a5 5 0 1 1-1.46-3.54"/><polyline points="12 2 12 5 9 5"/></svg>
+              다음 pane
+            </button>
+            <button disabled={!hasActive} onClick={() => send('\x02z')} className={btnClass} title="Ctrl+b z">
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><polyline points="8.5 2 12 2 12 5.5"/><polyline points="5.5 12 2 12 2 8.5"/><line x1="12" y1="2" x2="8" y2="6"/><line x1="2" y1="12" x2="6" y2="8"/></svg>
+              Zoom
+            </button>
           </div>
           <div className="text-[9px] text-[#9399b2] uppercase tracking-wider pt-1">Window</div>
           <div className="flex flex-wrap gap-1">
-            <button disabled={!hasActive} onClick={() => send('\x02c')} className={btnClass} title="Ctrl+b c">🪟 새 창</button>
-            <button disabled={!hasActive} onClick={() => send('\x02n')} className={btnClass} title="Ctrl+b n">➡ 다음 창</button>
+            <button disabled={!hasActive} onClick={() => send('\x02c')} className={btnClass} title="Ctrl+b c">
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"><rect x="1.5" y="2" width="11" height="10" rx="1"/><line x1="7" y1="5" x2="7" y2="9"/><line x1="5" y1="7" x2="9" y2="7"/></svg>
+              새 창
+            </button>
+            <button disabled={!hasActive} onClick={() => send('\x02n')} className={btnClass} title="Ctrl+b n">
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><line x1="2.5" y1="7" x2="11" y2="7"/><polyline points="7.5 3.5 11 7 7.5 10.5"/></svg>
+              다음 창
+            </button>
             <button
               disabled={!hasActive}
               onClick={() => {
@@ -300,7 +321,10 @@ function TmuxPanelCore(props: TmuxPanelCoreProps) {
               }}
               className={btnClass}
               title="Ctrl+b &"
-            >✕ 창 닫기</button>
+            >
+              <svg width="11" height="11" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"><line x1="3.5" y1="3.5" x2="10.5" y2="10.5"/><line x1="10.5" y1="3.5" x2="3.5" y2="10.5"/></svg>
+              창 닫기
+            </button>
           </div>
         </div>
       )}
