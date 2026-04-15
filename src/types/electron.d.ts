@@ -144,6 +144,10 @@ interface LocalTmuxAPI {
   new: (ptyId: string, sessionName?: string) => void;
   detach: (ptyId: string) => void;
   kill: (sessionName: string) => Promise<void>;
+  listWindows: (sessionName: string) => Promise<TmuxWindow[]>;
+  listPanes: (sessionName: string, windowIndex: number) => Promise<TmuxPane[]>;
+  sendKeys: (ptyId: string, keys: string) => void;
+  setMouse: (ptyId: string, on: boolean) => void;
 }
 
 interface LocalDockerAPI {
@@ -205,12 +209,31 @@ interface TmuxListResult {
   sessions: TmuxSession[];
 }
 
+interface TmuxWindow {
+  index: number;
+  name: string;
+  active: boolean;
+  paneCount: number;
+}
+
+interface TmuxPane {
+  index: number;
+  title: string;
+  active: boolean;
+  command: string;
+  size: string;
+}
+
 interface TmuxAPI {
   list: (sshSessionId: string) => Promise<TmuxListResult>;
   attach: (sshSessionId: string, sessionName: string) => void;
   new: (sshSessionId: string, sessionName?: string) => void;
   detach: (sshSessionId: string) => void;
   kill: (sshSessionId: string, sessionName: string) => Promise<void>;
+  listWindows: (sshSessionId: string, sessionName: string) => Promise<TmuxWindow[]>;
+  listPanes: (sshSessionId: string, sessionName: string, windowIndex: number) => Promise<TmuxPane[]>;
+  sendKeys: (sshSessionId: string, keys: string) => void;
+  setMouse: (sshSessionId: string, on: boolean) => void;
 }
 
 interface PortForwardingAPI {
@@ -227,6 +250,10 @@ interface WslTmuxAPI {
   new: (ptyId: string, sessionName?: string) => void;
   detach: (ptyId: string) => void;
   kill: (distro: string, sessionName: string) => Promise<void>;
+  listWindows: (distro: string, sessionName: string) => Promise<TmuxWindow[]>;
+  listPanes: (distro: string, sessionName: string, windowIndex: number) => Promise<TmuxPane[]>;
+  sendKeys: (ptyId: string, keys: string) => void;
+  setMouse: (ptyId: string, on: boolean) => void;
 }
 
 type DockerContainerState =

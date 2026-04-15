@@ -1,5 +1,5 @@
 import { getSshSession, writeSsh } from './ssh-manager';
-import type { TmuxSession, TmuxListResult } from './tmux-types';
+import type { TmuxSession, TmuxListResult, TmuxWindow, TmuxPane } from './tmux-types';
 
 /** 세션 이름에서 셸 인젝션을 방지하기 위한 이스케이프 */
 function sanitizeSessionName(name: string): string {
@@ -136,6 +136,68 @@ export function createTmuxSession(sshSessionId: string, sessionName?: string): v
 /** tmux 세션 분리 — Ctrl+b d 키 시퀀스 전송 */
 export function detachTmux(sshSessionId: string): void {
   writeSsh(sshSessionId, '\x02d');
+}
+
+/** 현재 attach 된 셸 스트림에 tmux 키 시퀀스 전송 */
+export function sendTmuxKeys(sshSessionId: string, keys: string): void {
+  writeSsh(sshSessionId, keys);
+}
+
+/** 현재 세션에만 마우스 모드 토글 (tmux 명령 프롬프트 경유) */
+export function setTmuxMouse(sshSessionId: string, on: boolean): void {
+  writeSsh(sshSessionId, `\x02:set -g mouse ${on ? 'on' : 'off'}\n`);
+}
+
+/** 세션의 창 목록 */
+export async function listTmuxWindows(sshSessionId: string, sessionName: string): Promise<TmuxWindow[]> {
+  const format = '#{window_index}|#{window_name}|#{window_active}|#{window_panes}';
+  const { stdout, code } = await execCommand(
+    sshSessionId,
+    `${PATH_PREFIX} tmux list-windows -t ${sanitizeSessionName(sessionName)} -F "${format}"`,
+  );
+  if (code !== 0) return [];
+  const result: TmuxWindow[] = [];
+  for (const line of stdout.trim().split('\n')) {
+    if (!line.trim()) continue;
+    const parts = line.split('|');
+    if (parts.length < 4) continue;
+    result.push({
+      index: parseInt(parts[0], 10) || 0,
+      name: parts[1],
+      active: parts[2] === '1',
+      paneCount: parseInt(parts[3], 10) || 0,
+    });
+  }
+  return result;
+}
+
+/** 창의 pane 목록 */
+export async function listTmuxPanes(
+  sshSessionId: string,
+  sessionName: string,
+  windowIndex: number,
+): Promise<TmuxPane[]> {
+  const format = '#{pane_index}|#{pane_title}|#{pane_active}|#{pane_current_command}|#{pane_width}x#{pane_height}';
+  const target = `${sanitizeSessionName(sessionName)}:${windowIndex}`;
+  const { stdout, code } = await execCommand(
+    sshSessionId,
+    `${PATH_PREFIX} tmux list-panes -t ${target} -F "${format}"`,
+  );
+  if (code !== 0) return [];
+  const result: TmuxPane[] = [];
+  for (const line of stdout.trim().split('\n')) {
+    if (!line.trim()) continue;
+    const parts = line.split('|');
+    if (parts.length < 5) continue;
+    result.push({
+      index: parseInt(parts[0], 10) || 0,
+      title: parts[1],
+      active: parts[2] === '1',
+      command: parts[3],
+      size: parts[4],
+    });
+  }
+  return result;
 }
 
 /** tmux 세션 종료 (exec 채널로 실행) */

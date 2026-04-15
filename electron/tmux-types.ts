@@ -19,3 +19,20 @@ export interface TmuxListResult {
   /** 현재 tmux 세션 목록 */
   sessions: TmuxSession[];
 }
+
+/** tmux 창(window) 정보 */
+export interface TmuxWindow {
+  index: number;
+  name: string;
+  active: boolean;
+  paneCount: number;
+}
+
+/** tmux pane 정보 */
+export interface TmuxPane {
+  index: number;
+  title: string;
+  active: boolean;
+  command: string;
+  size: string;
+}

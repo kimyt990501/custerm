@@ -212,6 +212,18 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
       kill: (sessionName: string): Promise<void> =>
         ipcRenderer.invoke('local-tmux:kill', sessionName),
+
+      listWindows: (sessionName: string): Promise<unknown[]> =>
+        ipcRenderer.invoke('local-tmux:list-windows', sessionName),
+
+      listPanes: (sessionName: string, windowIndex: number): Promise<unknown[]> =>
+        ipcRenderer.invoke('local-tmux:list-panes', sessionName, windowIndex),
+
+      sendKeys: (ptyId: string, keys: string): void =>
+        ipcRenderer.send('local-tmux:send-keys', ptyId, keys),
+
+      setMouse: (ptyId: string, on: boolean): void =>
+        ipcRenderer.send('local-tmux:set-mouse', ptyId, on),
     },
 
     docker: {
@@ -280,6 +292,18 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
     kill: (sshSessionId: string, sessionName: string): Promise<void> =>
       ipcRenderer.invoke('tmux:kill', sshSessionId, sessionName),
+
+    listWindows: (sshSessionId: string, sessionName: string): Promise<unknown[]> =>
+      ipcRenderer.invoke('tmux:list-windows', sshSessionId, sessionName),
+
+    listPanes: (sshSessionId: string, sessionName: string, windowIndex: number): Promise<unknown[]> =>
+      ipcRenderer.invoke('tmux:list-panes', sshSessionId, sessionName, windowIndex),
+
+    sendKeys: (sshSessionId: string, keys: string): void =>
+      ipcRenderer.send('tmux:send-keys', sshSessionId, keys),
+
+    setMouse: (sshSessionId: string, on: boolean): void =>
+      ipcRenderer.send('tmux:set-mouse', sshSessionId, on),
   },
 
   // --- Docker API (SSH) ---
@@ -324,6 +348,18 @@ contextBridge.exposeInMainWorld('electronAPI', {
 
       kill: (distro: string, sessionName: string): Promise<void> =>
         ipcRenderer.invoke('wsl-tmux:kill', distro, sessionName),
+
+      listWindows: (distro: string, sessionName: string): Promise<unknown[]> =>
+        ipcRenderer.invoke('wsl-tmux:list-windows', distro, sessionName),
+
+      listPanes: (distro: string, sessionName: string, windowIndex: number): Promise<unknown[]> =>
+        ipcRenderer.invoke('wsl-tmux:list-panes', distro, sessionName, windowIndex),
+
+      sendKeys: (ptyId: string, keys: string): void =>
+        ipcRenderer.send('wsl-tmux:send-keys', ptyId, keys),
+
+      setMouse: (ptyId: string, on: boolean): void =>
+        ipcRenderer.send('wsl-tmux:set-mouse', ptyId, on),
     },
 
     docker: {
