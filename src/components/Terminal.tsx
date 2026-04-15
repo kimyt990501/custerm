@@ -115,26 +115,41 @@ function TerminalComponent(props: TerminalProps) {
             return false;
           }
 
-          // Ctrl+V: 클립보드 내용을 직접 처리 (이미지면 경로, 텍스트면 텍스트)
-          if (e.key === 'v') {
+          // Ctrl+C: 선택이 있으면 복사, 없으면 SIGINT(0x03) 를 pty/ssh 로 전송
+          if (e.key === 'c' || e.key === 'C') {
             e.preventDefault();
-            window.electronAPI.clipboard.paste().then(result => {
+            const selection = xterm.getSelection();
+            if (selection) {
+              navigator.clipboard.writeText(selection).catch(() => {});
+              xterm.clearSelection();
+            } else {
+              const id = sessionIdRef.current;
+              if (id) {
+                if (props.type === 'local' || props.type === 'wsl') {
+                  window.electronAPI.pty.write(id, '\x03');
+                } else {
+                  window.electronAPI.ssh.write(id, '\x03');
+                }
+              }
+            }
+            return false;
+          }
+
+          // Ctrl+V: 터미널에는 항상 텍스트만 붙여넣는다.
+          // (clipboard.paste 는 이미지가 있으면 경로를 반환하므로 여기서는 쓰지 않는다)
+          if (e.key === 'v' || e.key === 'V') {
+            e.preventDefault();
+            navigator.clipboard.readText().then(text => {
+              if (!text) return;
               const id = sessionIdRef.current;
               if (!id) return;
-              let content = '';
-              if (result.type === 'image' && result.path) {
-                content = result.path;
-              } else if (result.type === 'text' && result.text) {
-                content = result.text;
-              }
-              if (!content) return;
               if (props.type === 'local' || props.type === 'wsl') {
-                window.electronAPI.pty.write(id, content);
+                window.electronAPI.pty.write(id, text);
               } else {
-                window.electronAPI.ssh.write(id, content);
+                window.electronAPI.ssh.write(id, text);
               }
-            });
-            return false; // xterm 기본 paste 차단
+            }).catch(() => {});
+            return false;
           }
         }
       }
