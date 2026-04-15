@@ -1,6 +1,10 @@
-import type { TmuxListResult } from './tmux-types';
+import type { TmuxListResult, TmuxWindow, TmuxPane } from './tmux-types';
 export declare function listLocalTmuxSessions(): Promise<TmuxListResult>;
 export declare function attachLocalTmuxSession(ptyId: string, sessionName: string): void;
 export declare function createLocalTmuxSession(ptyId: string, sessionName?: string): void;
 export declare function detachLocalTmux(ptyId: string): void;
+export declare function sendLocalTmuxKeys(ptyId: string, keys: string): void;
+export declare function setLocalTmuxMouse(ptyId: string, on: boolean): void;
+export declare function listLocalTmuxWindows(sessionName: string): Promise<TmuxWindow[]>;
+export declare function listLocalTmuxPanes(sessionName: string, windowIndex: number): Promise<TmuxPane[]>;
 export declare function killLocalTmuxSession(sessionName: string): Promise<void>;

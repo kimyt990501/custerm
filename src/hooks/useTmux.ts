@@ -9,6 +9,7 @@ export function useTmux({ sshSessionId }: UseTmuxOptions) {
   const [tmuxAvailable, setTmuxAvailable] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activeSessionName, setActiveSessionName] = useState<string | null>(null);
   const initDone = useRef(false);
 
   const refresh = useCallback(async () => {
@@ -25,7 +26,6 @@ export function useTmux({ sshSessionId }: UseTmuxOptions) {
     }
   }, [sshSessionId]);
 
-  // 마운트 시 자동 조회
   useEffect(() => {
     if (initDone.current) return;
     initDone.current = true;
@@ -34,18 +34,19 @@ export function useTmux({ sshSessionId }: UseTmuxOptions) {
 
   const attach = useCallback((sessionName: string) => {
     window.electronAPI.tmux.attach(sshSessionId, sessionName);
-    // attach 후 tmux가 화면을 다시 그리도록 resize 이벤트를 발생시킨다.
-    // FitAddon이 이 이벤트를 받아 fit() → xterm.onResize → ssh.resize 순으로 처리한다.
+    setActiveSessionName(sessionName);
     setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
   }, [sshSessionId]);
 
   const createSession = useCallback((sessionName?: string) => {
     window.electronAPI.tmux.new(sshSessionId, sessionName || undefined);
+    setActiveSessionName(sessionName || null);
     setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
   }, [sshSessionId]);
 
   const detach = useCallback(() => {
     window.electronAPI.tmux.detach(sshSessionId);
+    setActiveSessionName(null);
     setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
   }, [sshSessionId]);
 
@@ -53,11 +54,28 @@ export function useTmux({ sshSessionId }: UseTmuxOptions) {
     try {
       setError(null);
       await window.electronAPI.tmux.kill(sshSessionId, sessionName);
+      if (activeSessionName === sessionName) setActiveSessionName(null);
       await refresh();
     } catch (err) {
       setError((err as Error).message);
     }
-  }, [sshSessionId, refresh]);
+  }, [sshSessionId, refresh, activeSessionName]);
+
+  const listWindows = useCallback((sessionName: string) => {
+    return window.electronAPI.tmux.listWindows(sshSessionId, sessionName);
+  }, [sshSessionId]);
+
+  const listPanes = useCallback((sessionName: string, windowIndex: number) => {
+    return window.electronAPI.tmux.listPanes(sshSessionId, sessionName, windowIndex);
+  }, [sshSessionId]);
+
+  const sendKeys = useCallback((keys: string) => {
+    window.electronAPI.tmux.sendKeys(sshSessionId, keys);
+  }, [sshSessionId]);
+
+  const setMouse = useCallback((on: boolean) => {
+    window.electronAPI.tmux.setMouse(sshSessionId, on);
+  }, [sshSessionId]);
 
   return {
     sessions,
@@ -70,5 +88,10 @@ export function useTmux({ sshSessionId }: UseTmuxOptions) {
     createSession,
     detach,
     killSession,
+    activeSessionName,
+    listWindows,
+    listPanes,
+    sendKeys,
+    setMouse,
   };
 }

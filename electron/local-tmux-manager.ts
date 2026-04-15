@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import { writePty } from './pty-manager';
-import type { TmuxSession, TmuxListResult } from './tmux-types';
+import type { TmuxSession, TmuxListResult, TmuxWindow, TmuxPane } from './tmux-types';
 
 function execLocalCommand(
   command: string,
@@ -83,6 +83,64 @@ export function createLocalTmuxSession(ptyId: string, sessionName?: string): voi
 
 export function detachLocalTmux(ptyId: string): void {
   writePty(ptyId, '\x02d');
+}
+
+export function sendLocalTmuxKeys(ptyId: string, keys: string): void {
+  writePty(ptyId, keys);
+}
+
+export function setLocalTmuxMouse(ptyId: string, on: boolean): void {
+  writePty(ptyId, `\x02:set -g mouse ${on ? 'on' : 'off'}\n`);
+}
+
+export async function listLocalTmuxWindows(sessionName: string): Promise<TmuxWindow[]> {
+  const safe = `'${sessionName.replace(/'/g, "'\\''")}'`;
+  const format = '#{window_index}|#{window_name}|#{window_active}|#{window_panes}';
+  const { stdout, code } = await execLocalCommand(
+    `tmux list-windows -t ${safe} -F "${format}"`,
+  );
+  if (code !== 0) return [];
+  const result: TmuxWindow[] = [];
+  for (const line of stdout.trim().split('\n')) {
+    const cleaned = line.replace(/\r/g, '').trim();
+    if (!cleaned) continue;
+    const parts = cleaned.split('|');
+    if (parts.length < 4) continue;
+    result.push({
+      index: parseInt(parts[0], 10) || 0,
+      name: parts[1],
+      active: parts[2] === '1',
+      paneCount: parseInt(parts[3], 10) || 0,
+    });
+  }
+  return result;
+}
+
+export async function listLocalTmuxPanes(
+  sessionName: string,
+  windowIndex: number,
+): Promise<TmuxPane[]> {
+  const safe = `'${sessionName.replace(/'/g, "'\\''")}'`;
+  const format = '#{pane_index}|#{pane_title}|#{pane_active}|#{pane_current_command}|#{pane_width}x#{pane_height}';
+  const { stdout, code } = await execLocalCommand(
+    `tmux list-panes -t ${safe}:${windowIndex} -F "${format}"`,
+  );
+  if (code !== 0) return [];
+  const result: TmuxPane[] = [];
+  for (const line of stdout.trim().split('\n')) {
+    const cleaned = line.replace(/\r/g, '').trim();
+    if (!cleaned) continue;
+    const parts = cleaned.split('|');
+    if (parts.length < 5) continue;
+    result.push({
+      index: parseInt(parts[0], 10) || 0,
+      title: parts[1],
+      active: parts[2] === '1',
+      command: parts[3],
+      size: parts[4],
+    });
+  }
+  return result;
 }
 
 export async function killLocalTmuxSession(sessionName: string): Promise<void> {

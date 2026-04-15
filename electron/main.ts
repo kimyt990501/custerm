@@ -45,6 +45,10 @@ import {
   createTmuxSession,
   detachTmux,
   killTmuxSession,
+  listTmuxWindows,
+  listTmuxPanes,
+  sendTmuxKeys,
+  setTmuxMouse,
 } from './tmux-manager';
 import { listWslDistros } from './wsl-manager';
 import {
@@ -53,6 +57,10 @@ import {
   createWslTmuxSession,
   detachWslTmux,
   killWslTmuxSession,
+  listWslTmuxWindows,
+  listWslTmuxPanes,
+  sendWslTmuxKeys,
+  setWslTmuxMouse,
 } from './wsl-tmux-manager';
 import { pasteFromClipboard } from './clipboard-manager';
 import {
@@ -83,6 +91,10 @@ import {
   createLocalTmuxSession,
   detachLocalTmux,
   killLocalTmuxSession,
+  listLocalTmuxWindows,
+  listLocalTmuxPanes,
+  sendLocalTmuxKeys,
+  setLocalTmuxMouse,
 } from './local-tmux-manager';
 import {
   listLocalDocker,
@@ -439,6 +451,22 @@ ipcMain.handle('tmux:kill', async (_event, sshSessionId: string, sessionName: st
   return killTmuxSession(sshSessionId, sessionName);
 });
 
+ipcMain.handle('tmux:list-windows', async (_event, sshSessionId: string, sessionName: string) => {
+  return listTmuxWindows(sshSessionId, sessionName);
+});
+
+ipcMain.handle('tmux:list-panes', async (_event, sshSessionId: string, sessionName: string, windowIndex: number) => {
+  return listTmuxPanes(sshSessionId, sessionName, windowIndex);
+});
+
+ipcMain.on('tmux:send-keys', (_event, sshSessionId: string, keys: string) => {
+  sendTmuxKeys(sshSessionId, keys);
+});
+
+ipcMain.on('tmux:set-mouse', (_event, sshSessionId: string, on: boolean) => {
+  setTmuxMouse(sshSessionId, on);
+});
+
 // --- WSL IPC 핸들러 ---
 
 ipcMain.handle('wsl:list-distros', () => {
@@ -463,6 +491,22 @@ ipcMain.on('wsl-tmux:detach', (_event, ptyId: string) => {
 
 ipcMain.handle('wsl-tmux:kill', async (_event, distro: string, sessionName: string) => {
   return killWslTmuxSession(distro, sessionName);
+});
+
+ipcMain.handle('wsl-tmux:list-windows', async (_event, distro: string, sessionName: string) => {
+  return listWslTmuxWindows(distro, sessionName);
+});
+
+ipcMain.handle('wsl-tmux:list-panes', async (_event, distro: string, sessionName: string, windowIndex: number) => {
+  return listWslTmuxPanes(distro, sessionName, windowIndex);
+});
+
+ipcMain.on('wsl-tmux:send-keys', (_event, ptyId: string, keys: string) => {
+  sendWslTmuxKeys(ptyId, keys);
+});
+
+ipcMain.on('wsl-tmux:set-mouse', (_event, ptyId: string, on: boolean) => {
+  setWslTmuxMouse(ptyId, on);
 });
 
 // --- Docker IPC 핸들러 (SSH) ---
@@ -561,6 +605,22 @@ ipcMain.on('local-tmux:detach', (_event, ptyId: string) => {
 
 ipcMain.handle('local-tmux:kill', async (_event, sessionName: string) => {
   return killLocalTmuxSession(sessionName);
+});
+
+ipcMain.handle('local-tmux:list-windows', async (_event, sessionName: string) => {
+  return listLocalTmuxWindows(sessionName);
+});
+
+ipcMain.handle('local-tmux:list-panes', async (_event, sessionName: string, windowIndex: number) => {
+  return listLocalTmuxPanes(sessionName, windowIndex);
+});
+
+ipcMain.on('local-tmux:send-keys', (_event, ptyId: string, keys: string) => {
+  sendLocalTmuxKeys(ptyId, keys);
+});
+
+ipcMain.on('local-tmux:set-mouse', (_event, ptyId: string, on: boolean) => {
+  setLocalTmuxMouse(ptyId, on);
 });
 
 // --- Local Docker IPC 핸들러 ---
